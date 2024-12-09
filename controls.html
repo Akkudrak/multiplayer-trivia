@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controls</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <script src="/socket.io/socket.io.js"></script>
+    <style type="text/css">
+        div {
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .hidden{
+            display: none;
+        }
+
+        .touch{
+            cursor: pointer;
+        }
+
+        #container { display:block; }
+        @media only screen and (orientation:portrait){
+          #container {
+            height: 100vw;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+          }
+        }
+        @media only screen and (orientation:landscape){
+          #container {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+        }
+    </style>
+
+</head>
+<body class="container" id="gameBody" style="margin: 0px;display: flex;flex-direction: column;overflow: hidden;">
+
+<div class="" id="mainscreen" style="width: 100vw;" onclick="startGame()">
+    <img src="/images/main.png" style="width:100vw;height:100vh" onclick="">
+</div>
+
+<div class="touch" style="position:absolute;right: 20px; bottom: 20px;z-index: 999;width: 5vw;">
+    <svg onclick="openFullscreen()"  id="maximize" version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="138.397" y="140.667" style="fill:#CEE8FA;" width="355.684" height="355.685"></rect> <g> <path style="fill:#2D527C;" d="M494.072,125.002h-355.68c-8.647,0-15.659,7.012-15.659,15.659V355.68H33.588v-59.302 c0-8.647-7.012-15.659-15.659-15.659s-15.659,7.012-15.659,15.659v74.961c0,8.647,7.012,15.659,15.659,15.659h104.804v109.342 c0,8.647,7.012,15.659,15.659,15.659h355.68c8.647,0,15.659-7.012,15.659-15.659v-355.68 C509.731,132.014,502.719,125.002,494.072,125.002z M478.412,480.681H154.051V156.32h324.361L478.412,480.681L478.412,480.681z"></path> <path style="fill:#2D527C;" d="M17.928,194.037c8.647,0,15.659-7.012,15.659-15.659V31.319h324.361v37.058 c0,8.647,7.012,15.659,15.659,15.659c8.647,0,15.659-7.012,15.659-15.659V15.659C389.267,7.012,382.255,0,373.608,0H17.928 C9.281,0,2.269,7.012,2.269,15.659v162.719C2.269,187.026,9.281,194.037,17.928,194.037z"></path> <path style="fill:#2D527C;" d="M317.808,332.584c4.009,0,8.014-1.53,11.073-4.587l64.836-64.837v36.358 c0,8.647,7.012,15.659,15.659,15.659c8.647,0,15.659-7.012,15.659-15.659v-74.162c0-8.647-7.012-15.659-15.659-15.659h-74.162 c-8.647,0-15.659,7.012-15.659,15.659s7.012,15.659,15.659,15.659h36.358l-64.836,64.837c-6.115,6.115-6.115,16.03,0,22.147 C309.793,331.054,313.801,332.584,317.808,332.584z"></path> <path style="fill:#2D527C;" d="M223.085,427.305h74.164c8.647,0,15.659-7.012,15.659-15.659c0-8.647-7.012-15.659-15.659-15.659 H260.89l21.405-21.403c6.115-6.115,6.115-16.029,0-22.147c-6.115-6.11-16.027-6.113-22.147,0l-21.405,21.403v-36.358 c0-8.647-7.012-15.659-15.659-15.659s-15.659,7.012-15.659,15.659v74.162C207.426,420.293,214.436,427.305,223.085,427.305z"></path> </g> </g></svg>
+
+
+    <svg class="touch hidden" id="minimize" onclick="closeFullscreen()" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="138.397" y="140.667" style="fill:#CFF09E;" width="355.684" height="355.685"></rect> <g> <path style="fill:#507C5C;" d="M494.072,125.002h-355.68c-8.647,0-15.659,7.012-15.659,15.659V355.68H33.588v-59.302 c0-8.647-7.012-15.659-15.659-15.659s-15.659,7.012-15.659,15.659v74.961c0,8.647,7.012,15.659,15.659,15.659h104.804v109.342 c0,8.647,7.012,15.659,15.659,15.659h355.68c8.647,0,15.659-7.012,15.659-15.659v-355.68 C509.731,132.014,502.719,125.002,494.072,125.002z M478.412,480.681H154.051V156.32h324.361L478.412,480.681L478.412,480.681z"></path> <path style="fill:#507C5C;" d="M17.928,194.037c8.647,0,15.659-7.012,15.659-15.659V31.319h324.361v37.058 c0,8.647,7.012,15.659,15.659,15.659c8.647,0,15.659-7.012,15.659-15.659V15.659C389.267,7.012,382.255,0,373.608,0H17.928 C9.281,0,2.269,7.012,2.269,15.659v162.719C2.269,187.026,9.281,194.037,17.928,194.037z"></path> <path style="fill:#507C5C;" d="M317.808,332.584c4.009,0,8.014-1.53,11.073-4.587l64.836-64.837v36.358 c0,8.647,7.012,15.659,15.659,15.659c8.647,0,15.659-7.012,15.659-15.659v-74.162c0-8.647-7.012-15.659-15.659-15.659h-74.162 c-8.647,0-15.659,7.012-15.659,15.659s7.012,15.659,15.659,15.659h36.358l-64.836,64.837c-6.115,6.115-6.115,16.03,0,22.147 C309.793,331.054,313.801,332.584,317.808,332.584z"></path> <path style="fill:#507C5C;" d="M223.085,427.305h74.164c8.647,0,15.659-7.012,15.659-15.659c0-8.647-7.012-15.659-15.659-15.659 H260.89l21.405-21.403c6.115-6.115,6.115-16.029,0-22.147c-6.115-6.11-16.027-6.113-22.147,0l-21.405,21.403v-36.358 c0-8.647-7.012-15.659-15.659-15.659s-15.659,7.012-15.659,15.659v74.162C207.426,420.293,214.436,427.305,223.085,427.305z"></path> </g> </g></svg>
+</div>
+
+<div class="hidden" style="width:100vw;position:relative;" id="controls">
+    <div id="div_1" class="screen" style="order:3;width: 100vw;height: 100vh;background-color: #3B3B3B;position: absolute;">
+        <div class="">
+            <center style="/* bottom: 5vh; */position: absolute;width: 70vw;left: 15vw;top: 10vh;" id="btn_center">
+                <img id="btn_fire" src="/images/btn_soltar.png" style="padding: 30px;background-color: #FFE273;border-radius: 500px;width: 100%;" onclick="fallingBall()">
+            </center>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<div class="hidden">
+    <div class="hidden" style="position: absolute;top: 20vh;left:3vw;font-size: 30pt;">
+            <div>A:<span id="control_a"></span></div>
+            <div>B:<span id="control_b"></span></div>
+            <div>G:<span id="control_g"></span></div>
+            <div>Y:<span id="gyro_y"></span></div>
+            <div>X:<span id="gyro_x"></span></div>
+            <div>Z:<span id="gyro_z"></span></div>
+        </div>
+</div>
+
+
+
+
+
+    
+    <script>
+        var alpha=false;
+        var alpha_correction=0;
+        var bullet=0;
+        var fullBullets=2;
+        var ycorrection=0;
+
+        var button_dispense=document.getElementById("btn_dispense")
+        var button_center=document.getElementById("btn_center")
+
+        var mainscreen=document.getElementById("mainscreen")
+        var controls=document.getElementById("controls");
+        var btnfire=document.getElementById("btn_fire");
+        function fallingBall(){
+            btnfire.style.backgroundColor="#FC5771";
+            Client.moveTarget_v2({id: target.id,x:0,y:0,action:true,bullets:bullet});
+
+            setTimeout(()=>{
+                btnfire.style.backgroundColor="#FFE273";
+            },200)
+            
+        }
+        function startGame(){
+            console.log("start");
+            Client.createTarget();;ycorrection=parseInt(document.getElementById('control_b').innerHTML);
+
+            mainscreen.classList.add("hidden");
+            controls.classList.remove("hidden");
+        }
+
+        function changeFunc(type){
+            if (type) {
+                alpha_correction=document.getElementById('control_a').text;
+                alpha=true;
+                document.getElementById("button-a").style.backgroundColor="green";
+                document.getElementById("button-b").style.backgroundColor="red";
+
+            }else{
+                alpha=false;
+                document.getElementById("button-a").style.backgroundColor="red";
+                document.getElementById("button-b").style.backgroundColor="green";
+            }
+        }
+
+        document.addEventListener("orientationchange", function(event){
+            switch(window.orientation) 
+            {  
+                case -90: case 90:
+                    /* Device is in landscape mode */
+                    break; 
+                default:
+                    /* Device is in portrait mode */
+            }
+        });
+        var elem = document.getElementById("gameBody");
+        var max = document.getElementById("maximize");
+        var min = document.getElementById("minimize");
+        var player={team:0,position:0,name:null,ready:false};
+        var allPlayers=[];
+
+        var random_username=["Leone","Absalom","Adams","Satoru","Emporio","Arnold","Blackmore","Boingo","Dio","Smokey","Bruno","Coco","Folgore","Tamaki","Diavolo","Ferdinand","Enya","Formaggio","Giorno","Tomoko","Wagon","Shizuka","Mary","Jotaro","Lisa","Magenta","Yuya","Erina","Iggy","Ozzy","Oingo","Holly","Josuke","Reimi","Akira","Gwess","Jolyne","Melone","Trish","Jinx","Rohan"];
+
+        function randomIntFromInterval(min, max) { // min and max included 
+          return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+
+        function openFullscreen() {
+        max.style.display="none";
+        min.style.display="block";
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+          } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+          }
+        }
+
+        function closeFullscreen() {
+            min.style.display="none";
+            max.style.display="block";
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+          }
+        }
+
+
+        function hideAll(){
+            var all=document.getElementsByClassName("screen");
+            for (i = 0; i < all.length; i++) {
+                all[i].style.display = 'none';
+            }
+        }
+
+        function toInstructions(){
+            hideAll()
+            document.getElementById("instructionsScreen").style.display="block";
+        }
+
+        function toRegister(){
+            hideAll();
+            document.getElementById("registerScreen").style.display="block";
+            if (localStorage.length>0) {
+                document.getElementById("username").value=localStorage.getItem("username");
+                player.id=localStorage.getItem("id_user")
+            }else{
+                changeName()
+            }
+            
+        }
+
+        function changeName(){
+            var old_name=document.getElementById("username").value;
+            var new_name=null;
+            while(true){
+                new_name=random_username[randomIntFromInterval(0,random_username.length-1)];
+                if (old_name!=new_name) {
+                    document.getElementById("username").value=new_name;
+                    localStorage.setItem("username", new_name);
+                    return false;
+                }
+            }
+            
+            
+        }
+
+        function toTeamSelection(){
+            
+            player.name=document.getElementById("username").value;
+            hideAll()
+            document.getElementById("teamScreen").style.display="block";
+            Client.sendRegister();
+        }
+
+        function selectPlayer(team, position){
+            if (!player.ready) {
+                if (player.team!=0) {
+                    document.getElementById("team_"+player.team+"_"+player.position).style.display="none";
+                }
+
+                if (team==player.team&&position==player.position) {
+                    player.ready=true;
+                    document.getElementById("ok_"+player.team+"_"+player.position).style.display="block";
+                }
+                if (localStorage.length>0) {
+                    document.getElementById("text_"+team+"_"+position).innerHTML=localStorage.getItem("username");
+                }
+                
+                document.getElementById("team_"+team+"_"+position).style.display="block";
+                player.team=team;
+                player.position=position; 
+            }else{
+                player.ready=false;
+                document.getElementById("ok_"+player.team+"_"+player.position).style.display="none";
+            }
+
+            document.getElementById("master_"+player.team+"_"+player.position).style.background="#FCC52A";
+            Client.sendRecordTeam();
+            
+            
+        }
+
+        function printAnotherPlayer(new_data){
+            document.getElementById("master_"+new_data.team+"_"+new_data.position).setAttribute("onclick","alert('Alguien más esta aquí, elige otra posición')");
+            document.getElementById("team_"+new_data.team+"_"+new_data.position).style.display="block";
+            if (new_data.ready) {
+                document.getElementById("ok_"+new_data.team+"_"+new_data.position).style.display="block";
+            }else{
+                document.getElementById("ok_"+new_data.team+"_"+new_data.position).style.display="none";
+            }
+
+            if (localStorage.getItem("username")==new_data.name) {
+                document.getElementById("text_"+new_data.team+"_"+new_data.position).innerHTML=localStorage.getItem("username");
+            }else{
+                document.getElementById("text_"+new_data.team+"_"+new_data.position).innerHTML=new_data.name;
+            }
+
+            if (new_data.id==player.id) {
+                document.getElementById("master_"+new_data.team+"_"+new_data.position).style.background="#FCC52A";
+            }
+            
+
+
+            
+        }
+
+        function eraseAnotherPlayer(old_data,new_data){
+            document.getElementById("master_"+old_data.team+"_"+old_data.position).setAttribute("onclick","selectPlayer("+old_data.team+","+old_data.position+");")
+            if (old_data.team!=new_data.team||old_data.position!=new_data.position) {
+                document.getElementById("team_"+old_data.team+"_"+old_data.position).style.display="none";
+                document.getElementById("ok_"+old_data.team+"_"+old_data.position).style.display="none";
+                if (old_data.team==1) {
+                    var color="#F34C54";
+                }else{
+                    var color="#2776F9"
+                }
+
+                document.getElementById("master_"+old_data.team+"_"+old_data.position).style.background=color;
+            }
+        }
+
+
+        var target={}
+        const vibrate = () => {
+          window.navigator.vibrate([500])
+        }
+
+        var connected=false;
+        var Client = {};
+        Client.socket = io.connect();
+
+        Client.centerCross = function(){
+            Client.socket.emit('centerCross',{id: target.id});
+        };
+        Client.sendDispense = function(){
+            Client.socket.emit('dispense');
+        };
+
+        Client.sendRegister = function(){
+            console.log(player);
+            Client.socket.emit('register',player);
+        };
+
+        Client.sendRecordTeam = function(){
+            console.log(player);
+            Client.socket.emit('teamRecord',player);
+        };
+
+        Client.createTarget = function(){
+            Client.socket.emit('createTarget');
+            connected=true;
+        };
+        var playerColor="";
+        Client.socket.on('setID',function(data){
+            console.log("Este ID",data);
+            switch(data.id){
+            case 0:
+                playerColor="#7BF2FF";
+                break;
+            case 1:
+                playerColor="#FA9C22";
+                break
+            case 2:
+                playerColor="#FFFC24";
+                break;
+            case 3:
+                playerColor="#E764EA";
+                
+                break;
+            }
+            bullet=data.bullets;
+            fullBullets=data.bullets;
+            //document.getElementById("myId").innerHTML="My ID:"+data.id;
+            target.id=data.id;
+            target.x=data.x;
+            target.y=data.y;
+            target.direction="";
+            //drawBullets(bullet,fullBullets)
+        });
+
+        Client.socket.on('resetGame',function(data){
+            location.reload();
+        });
+
+        Client.socket.on('resetGame',function(data){
+            location.reload();
+        });
+
+        Client.socket.on('endGame',function(prizes){
+            console.log(prizes);
+            button_dispense.style.display="block";
+            button_center.style.display="none";
+        });
+
+
+        Client.socket.on('registerReturn',function(data){
+            console.log("registerReturn",data);
+            player.id=data.id;
+            localStorage.setItem("id_user", player.id);
+        });
+
+        Client.socket.on('teamRecordReturn',function(data){
+            console.log("ya estan",data);
+
+            for (var i = 0; i < data.length; i++) {
+                    if (data[i].team) {
+                        printAnotherPlayer(data[i]);
+                    }
+                
+            }
+
+            for (var i = 0; i < allPlayers.length; i++) {
+                    if (allPlayers[i].team) {
+                        eraseAnotherPlayer(allPlayers[i],data[i]);
+                    }
+                
+            }
+
+            allPlayers=data;  
+        });
+
+        
+
+        Client.moveTarget = function(target){
+            console.log("move");
+            Client.socket.emit('moveTarget',target);
+        };
+
+        Client.moveTarget_v2 = function(data){
+            Client.socket.emit('moveTarget_v2',data);
+        };
+
+        Client.reloadGun = function(data){
+            playSound("reload");
+            bullet=fullBullets
+            drawBullets(bullet,fullBullets)
+            Client.socket.emit('reloadGun',{id: target.id,x:_x,y:_y,action:false,bullets:bullet});
+        };
+
+   
+
+        function drawBullets(actual,max){
+            var div=document.getElementById("bullets_div");
+            div.innerHTML="";
+            for (var i = 0; i < max; i++) {
+                if (i<actual) {
+                    div.innerHTML+='<img src="/images/shooting/bullet_full.png" style="width: 20%;padding: 1%;">';
+                }else{
+                    div.innerHTML+='<img src="/images/shooting/bullet_empty.png" style="width: 20%;padding: 1%;">';
+                }
+                
+            }
+        }
+
+
+        var cooldown=false;
+
+    
+
+
+
+        function handleOrientation(event) {
+            console.log("mvoe");
+          moveorientation(event.alpha,event.beta,event.gamma);
+          /*updateFieldIfNotNull('control_a', event.alpha);
+          updateFieldIfNotNull('control_b', event.beta);
+          updateFieldIfNotNull('control_g', event.gamma);*/
+        }
+
+        function handleMotion(event) {
+            moveorientation(event.rotationRate.alpha,event.rotationRate.beta,event.rotationRate.gamma);
+          updateFieldIfNotNull('gyro_z', event.rotationRate.alpha);
+          
+            
+          updateFieldIfNotNull('gyro_y', event.rotationRate.gamma);
+          updateFieldIfNotNull('gyro_x', event.rotationRate.beta);
+        }
+
+
+
+        function moveorientation(a,b,g){
+            if (alpha) {
+                
+                if (a<4&&a>-4) {
+                    g=0-alpha_correction;
+                }else{
+                    g=a-alpha_correction;
+                }
+            }else{
+                if (g<4&&g>-4) {
+                    g=0;
+                }
+            }
+            
+
+            if (b<4&&b>-4) {
+                b=0;
+            }
+            _x=(g)*-1;
+            _y=(a);
+            Client.moveTarget_v2({id: target.id,x:_x,y:_y/*-parseInt(ycorrection)*/,action:false});
+        }
+
+        
+
+
+        function updateFieldIfNotNull(fieldName, value, precision=10){
+          if (value != null)
+            
+
+            if (fieldName=="control_b") {
+                document.getElementById(fieldName).innerHTML=value.toFixed(0)-parseInt(ycorrection);
+            }
+            if (fieldName=="gyro_z") {
+                if (value>(350)&&bullet<fullBullets) {
+                    Client.reloadGun();
+                }
+                
+            }
+        }
+
+
+        let is_running = false;
+         function startDemo() {
+          // Request permission for iOS 13+ devices
+          if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function"
+          ) {
+            DeviceMotionEvent.requestPermission();
+          }
+          
+          if (is_running){
+            window.removeEventListener("devicemotion", handleMotion);
+            window.removeEventListener("deviceorientation", handleOrientation);
+            is_running = false;
+          }else{
+            window.addEventListener("devicemotion", handleMotion);
+            window.addEventListener("deviceorientation", handleOrientation);
+            is_running = true;
+          }
+        };
+
+        let wakeLockObj=null;
+        async function requestLock(){
+            try{
+                wakeLockObj=await navigator.wakelock.request("screen");
+                console.log("bloqueada");
+            }catch(error){
+                console.log(error);
+            }
+
+        }
+        //requestLock();
+        
+
+
+
+
+        function playSound(id){
+              document.getElementById(id).cloneNode(true).play();
+        }
+    
+
+
+
+    </script>
+
+
+
+</body>
+</html>

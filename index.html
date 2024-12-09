@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trivia Game</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/lib/webserial.min.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="lib/qrcode.min.js"></script>
+    <style media='screen' type='text/css'>
+      @font-face {
+        font-family: mikado;
+        src: url('/lib/fonts/MikadoBold.otf');
+        font-weight:400;
+        font-weight:normal;
+      }
+    </style>
+
+
+    <style type="text/css">
+        .hidden{
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+    <script type="text/javascript" src="/scenes/globals.js"></script>
+    <script type="text/javascript" src="/scenes/aux_functions.js"></script>
+    <script type="module" src="/scenes/config.js"></script>
+    <script type="text/javascript" src="/lib/webrtc.js"></script>
+
+    <!--script type="text/javascript" src="/lib/socket_io.js"></script>
+    <script type="text/javascript" src="/lib/webserial.js"></script>
+    <script type="text/javascript" src="/lib/start.js"></script>
+    <script type="text/javascript" src="/lib/ws_application_ams.js"--></script>
+</head>
+<body style="margin: 0px;overflow:hidden !important;;padding: 0;">
+    <div style="font-family:mikado; position: absolute; left:-1000px; visibility:hidden;">.</div>
+
+    <div  class="" id="trivia_multiplayer" style="padding: 0; margin: 0;overflow:hidden;;"></div>
+
+
+    <div class="" id="imagenes"></div>
+
+</body>
+</html>

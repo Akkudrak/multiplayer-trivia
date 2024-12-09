@@ -1,0 +1,61 @@
+/*!
+ * Boardroid Connection webserial v2.1
+ * @author danidoble
+ * @website https://github.com/danidoble
+ * @website https://danidoble.com
+ * @year 2021
+ * Copyright danidoble
+ * @licence Apache2.0
+ */
+
+/*!
+ * Danidoble General Functions v2.1
+ * @author danidoble
+ * @website https://github.com/danidoble
+ * @website https://danidoble.com
+ * @year 2021
+ * Copyright danidoble
+ * @licence Apache2.0
+ */
+
+/*!
+ * Emulate webserial responses v2.1
+ * @author danidoble
+ * @website https://github.com/danidoble
+ * @website https://danidoble.com
+ * @year 2021
+ * Copyright danidoble
+ * @licence Apache2.0
+ */
+
+/*!
+ * Jofemar Connection webserial v2.1
+ * @author danidoble
+ * @website https://github.com/danidoble
+ * @website https://danidoble.com
+ * @year 2021
+ * Copyright danidoble
+ * @licence Apache2.0
+ */
+
+/*!
+ * Locker Connection webserial v2.1
+ * @author danidoble
+ * @website https://github.com/danidoble
+ * @website https://danidoble.com
+ * @year 2021
+ * Copyright danidoble
+ * @licence Apache2.0
+ */
+
+/*!
+ * Relay killer connection webserial v2.1
+ * @author danidoble
+ * @website https://github.com/danidoble
+ * @website https://danidoble.com
+ * @year 2021
+ * Copyright danidoble
+ * @licence Apache2.0
+ */
+
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
