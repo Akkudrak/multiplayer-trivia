@@ -392,6 +392,10 @@
             allPlayers=data;  
         });
 
+        Client.socket.on('testTeams',function(data){
+        console.log("testTeams",data);
+    });
+
         
 
         Client.moveTarget = function(target){
