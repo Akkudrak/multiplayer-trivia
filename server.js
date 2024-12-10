@@ -79,6 +79,25 @@ io.on('connection',function(socket){
         socket.broadcast.emit('endGame',prizes);
     });
 
+    socket.on('testTeams',function(prizes){
+        var users=[
+            {nombre:"Luis Daniel Sandoval",personaje:null},
+            {nombre:"Oscar Alvarez",personaje:null},
+            {nombre:"Sandra Ines Vera",personaje:null},
+            {nombre:"Jorge Lerings Rodríguez",personaje:null},
+            {nombre:"Sonia Marin",personaje:null},
+            {nombre:"Alfredo Pérez",personaje:null},
+            {nombre:"Alejandro Vargas",personaje:null},
+            {nombre:"Hernán Lucas",personaje:null},
+            {nombre:"Iván Méndez",personaje:null},
+            {nombre:"Adolfo Soria",personaje:null},
+            {nombre:"Marco Antonio Hernández",personaje:null}
+            ];
+        console.log(users);
+        io.emit('testTeams',{name:"Team 1",players:users});
+        socket.broadcast.emit('testTeams',{name:"Team 1",players:users});
+    });
+
 
 
 

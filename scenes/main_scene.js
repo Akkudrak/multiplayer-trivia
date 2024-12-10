@@ -55,6 +55,9 @@ export class mainScene extends Phaser.Scene{
         this.load.image('head_35', 'images/gui/heads/head_35.png');
         this.load.image('head_36', 'images/gui/heads/head_36.png');
 
+        //sort teams
+        this.load.image('title_equipos', 'images/gui/equipos.png');
+
         //generic
         this.load.image('btn_sm_green', 'images/gui/btn_sm_green.png');
         this.load.image('btn_sm_red', 'images/gui/btn_sm_red.png');

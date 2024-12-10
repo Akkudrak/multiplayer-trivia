@@ -38,7 +38,29 @@
     <div  class="" id="trivia_multiplayer" style="padding: 0; margin: 0;overflow:hidden;;"></div>
 
 
-    <div class="" id="imagenes"></div>
+    <div class="hidden" id="imagenes">
+        <img id="team_1_img">
+        <img id="team_2_img">
+        <img id="team_3_img">
+        <img id="team_4_img">
+        <img id="team_5_img">
+        <img id="team_6_img">
+        <img id="team_7_img">
+        <img id="team_8_img">
+        <img id="team_9_img">
+        <img id="team_10_img">
+    </div>
 
+
+    <canvas class="hidden" id="team_canvas" width="390" height="725"></canvas>
+
+<script type="text/javascript">
+
+    generateTeams();
+    for (var i = 0; i < 10; i++) {
+       generateImages("team_"+(i+1)+"_img","bg_team_"+(i+1)+".png");
+    }
+    
+</script>
 </body>
 </html>
