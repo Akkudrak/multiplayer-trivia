@@ -52,7 +52,7 @@ export class waiting_scene extends Phaser.Scene{
     }
 
     showConfirmation(){
-            console.log(modal.getBounds());
+            //console.log(modal.getBounds());
             modal.addAt(this.add.text(mid_h,modal.getBounds().top+(padding*4), "Eliminar al siguiente jugador?", { fontFamily: 'mikado', fontSize: 60, color:"#000000" }).setOrigin(.5, 0),1);
             modal.addAt(this.add.text(mid_h,modal.getBounds().bottom-100, "Elige", { fontFamily: 'mikado', fontSize: 80, color:"#000000" }).setOrigin(.5, 0),2);
             modal.addAt(this.add.text(mid_h,mid_v+(mid_v/4), "Folgore", { fontFamily: 'mikado', fontSize: 50, color:"#000000" }).setOrigin(.5, 0),3);
