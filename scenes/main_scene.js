@@ -13,7 +13,7 @@ export class mainScene extends Phaser.Scene{
 
         //waiting players loads
         this.load.image('title_registro', 'images/gui/title_registro.png');
-        this.load.image('bg_elipse', 'images/gui/bg_elipse.png');
+        this.load.image('bg_elipse', '/images/gui/bg_elipse.png');
         this.load.image('pet_1', 'images/gui/pet1.png');
         this.load.image('pet_2', 'images/gui/pet2.png');
         this.load.image('pet_3', 'images/gui/pet3.png');

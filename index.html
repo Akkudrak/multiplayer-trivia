@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/lib/webserial.min.css">
     <script src="/socket.io/socket.io.js"></script>
-    <script src="lib/qrcode.min.js"></script>
+    <script src="/lib/qrcode.min.js"></script>
     <style media='screen' type='text/css'>
       @font-face {
         font-family: mikado;
@@ -39,6 +39,82 @@
 
 
     <div class="" id="imagenes"></div>
-
 </body>
+<script>
+
+// generateTeams();
+        // for (var i = 0; i < 10; i++) {
+        //     generateImages("team_"+(i+1)+"_img");
+        // }
+
+    var Client = {};
+    Client.socket = io.connect();
+
+
+    Client.sendTest = function(){
+        Client.socket.emit('testTeams');
+    };
+
+    Client.sendReset = function(){
+        Client.socket.emit('reset');
+    };
+
+
+
+    Client.sendendGame = function(prizes){
+        Client.socket.emit('endGame',prizes);
+    };
+
+
+    Client.socket.on('createTarget',function(data){
+        resume()
+        console.log("start game",data);
+        start=true;
+        document.getElementById('phaser-example').classList.remove("hidden");
+        document.getElementById('main').classList.add("hidden");
+        backgroundMusic.stop();
+        ongameMusic.play();
+
+    });
+
+
+    Client.socket.on('moveTarget_v2',function(data){
+        game.scene.scenes[0].moveTarget(data);
+    });
+
+    Client.socket.on('reloadGun',function(data){
+        cross[data.id].bulletsfired=cross[data.id].bulletsmax;
+        cross[data.id].realoads++;
+        game.scene.scenes[0].drawBullets(cross[data.id]);
+    });
+
+    Client.socket.on('centerCross',function(data){
+        cross[data.id].x=mid_h;
+        cross[data.id].y=mid_v;
+    });
+
+    Client.socket.on('userReadyView',function(data){
+        console.log('El usuario de equipo esta listo',data)
+    });
+
+    
+
+    Client.socket.on('dispense',function(data){
+        console.log("endgame");
+        endGame();
+    });
+
+    var characterList = [];
+    Client.socket.on('selectedCharacter',function(data){
+
+        characterList.push(data);
+        console.log(data);
+        //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
+        // console.log("testTeams",data);
+        // receiveTeam(data)
+
+    });
+
+    Client.sendReset();
+</script>
 </html>
