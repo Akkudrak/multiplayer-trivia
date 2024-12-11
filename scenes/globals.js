@@ -23,83 +23,86 @@
 
 
 
-        var users=[
-            {nombre:"Luis Daniel Sandoval",personaje:null},
-            {nombre:"Oscar Alvarez",personaje:null},
-            {nombre:"Sandra Ines Vera",personaje:null},
-            {nombre:"Jorge Lerings Rodríguez",personaje:null},
-            {nombre:"Sonia Marin",personaje:null},
-            {nombre:"Alfredo Pérez",personaje:null},
-            {nombre:"Alejandro Vargas",personaje:null},
-            {nombre:"Hernán Lucas",personaje:null},
-            {nombre:"Iván Méndez",personaje:null},
-            {nombre:"Adolfo Soria",personaje:null},
-            {nombre:"Marco Antonio Hernández",personaje:null},
-            {nombre:"Karina Jiménez",personaje:null},
-            {nombre:"Estefanía Carrera",personaje:null},
-            {nombre:"Rodrigo Javier Gonzalez",personaje:null},
-            {nombre:"Sergio Isaac Molina",personaje:null},
-            {nombre:"Kasandra López",personaje:null},
-            {nombre:"José Juan Zamora",personaje:null},
-            {nombre:"Bernardo Guerrero",personaje:null},
-            {nombre:"Aarón Cervantes",personaje:null},
-            {nombre:"Victor Adjani Corona",personaje:null},
-            {nombre:"Jose Arturo Molina",personaje:null},
-            {nombre:"Graciela",personaje:null},
-            {nombre:"Jaime Ortiz",personaje:null},
-            {nombre:"Guillermo Ortiz",personaje:null},
-            {nombre:"Carlos Antonio Espinoza",personaje:null},
-            {nombre:"Oscar Saucedo",personaje:null},
-            {nombre:"Marisela Sánchez",personaje:null},
-            {nombre:"Karen Eridany Marín",personaje:null},
-            {nombre:"Aldo Eric Bahena",personaje:null},
-            {nombre:"Rubén Díaz",personaje:null},
-            {nombre:"Eduardo David Beltran",personaje:null},
-            {nombre:"Luis Alberto Santiago",personaje:null},
-            {nombre:"Estephania Krauletz",personaje:null},
-            {nombre:"Jenny Irais Avelino",personaje:null},
-            {nombre:"Juan Francisco Veneros",personaje:null},
-            {nombre:"Rafael Alcalá",personaje:null},
-            {nombre:"Christian Isaac Mercado",personaje:null},
-            {nombre:"Santa Martha Flores",personaje:null},
-            {nombre:"Beatriz Huerta",personaje:null},
-            {nombre:"Luis Angel Gamboa",personaje:null},
-            {nombre:"Abraham Amaya",personaje:null},
-            {nombre:"Ricardo Daniel Gómez",personaje:null},
-            {nombre:"Jonathan Cabrera",personaje:null},
-            {nombre:"Gabriel De Jesús ",personaje:null},
-            {nombre:"Flor Evangelina Sandoval",personaje:null},
-            {nombre:"Alan Yael Hernández",personaje:null},
-            {nombre:"Adriana Alonso",personaje:null},
-            {nombre:"Erik Anthony Sánchez",personaje:null},
-            {nombre:"Gustavo Cesar Valero",personaje:null},
-            {nombre:"Armando Cuevas",personaje:null},
-            {nombre:"Alberto Sánchez",personaje:null},
-            {nombre:"Wulfrano Castillo",personaje:null},
-            {nombre:"Daniel Martin González",personaje:null},
-            {nombre:"Grecia Valentino",personaje:null},
-            {nombre:"Sergio Ivan Espitia",personaje:null},
-            {nombre:"Francisco Javier Martinez",personaje:null},
-            {nombre:"Maria Guadalupe Garcia",personaje:null},
-            {nombre:"Jorge Brian Nava",personaje:null},
-            {nombre:"Eduardo Hernández",personaje:null},
-            {nombre:"Evelyn Deniss Gallegos",personaje:null},
-            {nombre:"Wendy Elizabeth Argumedo",personaje:null},
-            {nombre:"Karla Paola Arredondo",personaje:null},
-            {nombre:"Cristobal Ramos",personaje:null},
-            {nombre:"Reyna Marisol Tovar",personaje:null},
-            {nombre:"Pablo Cureño",personaje:null},
-            {nombre:"Héctor Leonardo Ramos",personaje:null},
-            {nombre:"Diego Armando Ariza",personaje:null},
-            {nombre:"Anthony Mendoza",personaje:null},
-            {nombre:"Brian Sanchez",personaje:null},
-            {nombre:"Juan Carlos Zúñiga",personaje:null},
-            {nombre:"Eduardo Rodriguez",personaje:null},
-            {nombre:"Maria Guadalupe Landeros",personaje:null},
-            {nombre:"Jesús Adrian Hernández",personaje:null},
-            {nombre:"Pamela Fuentes",personaje:null},
-            {nombre:"Daniel Omar Cruz",personaje:null},
-            ];
+        var users=[{nombre:'ARTURO MOLINA',personaje:null},
+                    {nombre:'GRACIELA HERNANDEZ',personaje:null},
+                    {nombre:'SANDRA VERA',personaje:null},
+                    {nombre:'ADOLFO SORIA',personaje:null},
+                    {nombre:'SONIA MARIN',personaje:null},
+                    {nombre:'CARLOS ESPINOZA',personaje:null},
+                    {nombre:'KAREN MARIN',personaje:null},
+                    {nombre:'RUBEN DIAZ',personaje:null},
+                    {nombre:'ALDO BAHENA',personaje:null},
+                    {nombre:'KASANDRA LOPEZ',personaje:null},
+                    {nombre:'ESTEFANIA CARRERA',personaje:null},
+                    {nombre:'LERINGS RODRIGUEZ',personaje:null},
+                    {nombre:'KARINA JIMENEZ',personaje:null},
+                    {nombre:'JAIME ORTIZ',personaje:null},
+                    {nombre:'OSCAR SAUCEDO',personaje:null},
+                    {nombre:'ESTEPHANIA KRAULETZ',personaje:null},
+                    {nombre:'RAFAEL ALCALA',personaje:null},
+                    {nombre:'SANTA FLORES',personaje:null},
+                    {nombre:'BEATRIZ HUERTA',personaje:null},
+                    {nombre:'ALBERTO SANCHEZ',personaje:null},
+                    {nombre:'GRECIA VALENTINO',personaje:null},
+                    {nombre:'DENISS GALLEGOS',personaje:null},
+                    {nombre:'PAOLA ARREDONDO',personaje:null},
+                    {nombre:'REYNA TOVAR',personaje:null},
+                    {nombre:'DIEGO ARIZA',personaje:null},
+                    {nombre:'ANTHONY MENDOZA',personaje:null},
+                    {nombre:'ARMANDO CUEVAS',personaje:null},
+                    {nombre:'SERGIO MOLINA',personaje:null},
+                    {nombre:'CHRISTIAN MERCADO',personaje:null},
+                    {nombre:'ALEJANDRO VARGAS',personaje:null},
+                    {nombre:'ALFREDO PEREZ',personaje:null},
+                    {nombre:'ERIK SANCHEZ',personaje:null},
+                    {nombre:'RODRIGO GONZALEZ',personaje:null},
+                    {nombre:'WULFRANO CASTILLO',personaje:null},
+                    {nombre:'GUILLERMO ORTIZ',personaje:null},
+                    {nombre:'DANIEL GONZALEZ',personaje:null},
+                    {nombre:'FRANCISCO MARTINEZ',personaje:null},
+                    {nombre:'MARCO HERNANDEZ',personaje:null},
+                    {nombre:'ANGEL GAMBOA',personaje:null},
+                    {nombre:'ALAN HERNANDEZ',personaje:null},
+                    {nombre:'MARIA GARCIA',personaje:null},
+                    {nombre:'WENDY ARGUMEDO',personaje:null},
+                    {nombre:'IVAN MENDEZ',personaje:null},
+                    {nombre:'DANIEL SANDOVAL',personaje:null},
+                    {nombre:'OSCAR ALVAREZ',personaje:null},
+                    {nombre:'BERNARDO GUERRERO',personaje:null},
+                    {nombre:'VICTOR CORONA',personaje:null},
+                    {nombre:'JUAN VENEROS',personaje:null},
+                    {nombre:'LUIS SANTIAGO',personaje:null},
+                    {nombre:'JENNY AVELINO',personaje:null},
+                    {nombre:'RICARDO GOMEZ',personaje:null},
+                    {nombre:'FLOR SANDOVAL',personaje:null},
+                    {nombre:'ADRIANA ALONSO',personaje:null},
+                    {nombre:'GUSTAVO VALERO',personaje:null},
+                    {nombre:'SERGIO ESPITIA',personaje:null},
+                    {nombre:'JORGE NAVA',personaje:null},
+                    {nombre:'EDUARDO HERNANDEZ',personaje:null},
+                    {nombre:'CRISTOBAL RAMOS',personaje:null},
+                    {nombre:'PABLO CUREÑO',personaje:null},
+                    {nombre:'HECTOR RAMOS',personaje:null},
+                    {nombre:'JUAN CARLOS ZUÑIGA',personaje:null},
+                    {nombre:'MARIA LANDEROS',personaje:null},
+                    {nombre:'JORGE NAVARRETE',personaje:null},
+                    {nombre:'EDUARDO RODRIGUEZ',personaje:null},
+                    {nombre:'JESUS HERNANDEZ',personaje:null},
+                    {nombre:'DANIEL OMAR CRUZ',personaje:null},
+                    {nombre:'JOSE ZAMORA',personaje:null},
+                    {nombre:'AARON CERVANTES',personaje:null},
+                    {nombre:'MARISELA SANCHEZ',personaje:null},
+                    {nombre:'DAVID BELTRAN',personaje:null},
+                    {nombre:'GABRIEL REYES',personaje:null},
+                    {nombre:'BRIAN SANCHEZ',personaje:null},
+                    {nombre:'PAMELA FUENTES',personaje:null},
+                    {nombre:'JUAN MIRANDA',personaje:null},
+                    {nombre:'DANIELA',personaje:null},
+                    {nombre:'ANDREA',personaje:null},
+                    {nombre:'ESPERANZA',personaje:null},
+                    {nombre:'DAVID',personaje:null},
+                    {nombre:'MAXIMILIANO',personaje:null},
+                    {nombre:'DAVID 2',personaje:null},];
 
 
         var base_cols=10;
@@ -116,6 +119,69 @@
 
         var pets=["head_1","head_2","head_3","head_4","head_5","head_6"]
 
-
-
         var modal=undefined;
+        var teams=[];
+        var index_teams=0;
+        function generateTeams(){
+            var equipos=10;
+            var team_size=parseInt(users.length/equipos);
+            var team=0;
+            var index=0;
+            for (var i = 0; i < equipos; i++) {
+                teams.push([]);
+
+                for (var j = 0; j < team_size; j++) {
+                    teams[team].push(users[index].nombre);
+                    index++;
+                }
+                team++;
+            }
+
+        }
+
+        function generateImages(id_destino,image_url){
+            const canvas = document.getElementById('team_canvas');
+            const ctx = canvas.getContext('2d');
+            const imgExport = document.getElementById(id_destino);
+
+            // Dibujar algo en el canvas
+            const image = new Image();
+            image.crossOrigin = 'Anonymous';
+
+            image.src = '/images/gui/'+image_url; // URL de la imagen
+            
+            image.onload = () => {
+                // Dibujar la imagen en el canvas
+                ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                // Añadir texto
+                ctx.font = '25px Mikado';
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                row=canvas.width / 2.5;
+                for (var i = 0; i < teams[index_teams].length; i++) {
+                    ctx.fillText(teams[index_teams][i], canvas.width / 2, row);
+                    row+=canvas.width / 8;
+                    
+                }
+                index_teams++;
+                row=canvas.width / 2.5;
+                
+                // Exportar el canvas a un URI de datos
+                const dataURL = canvas.toDataURL();
+                imgExport.src = dataURL; // Asignar el URI a la etiqueta <img>
+            };
+        }
+
+        var synthesis = window.speechSynthesis;
+            var utterance = new SpeechSynthesisUtterance("");
+            utterance.pitch=1.5;
+            utterance.rate=1.1;
+
+        setTimeout(()=>{
+            var voices=synthesis.getVoices();
+            voices=synthesis.getVoices();
+            utterance.voice=voices[9];
+            console.log(voices);
+        },500)
+        

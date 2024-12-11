@@ -201,16 +201,6 @@ io.on('connection',function(socket){
         socket.broadcast.emit('testTeams',{name:"Team 1",players:users}); //Todos menos el emisor! MEGAFONO PLATA
     });
 
-
-
-
-
-
-
-
-
-
-
     socket.on('reset',function(){
         console.log("reset");
         server.lastPlayderID = 1;

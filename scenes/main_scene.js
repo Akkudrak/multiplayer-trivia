@@ -15,6 +15,7 @@ export class mainScene extends Phaser.Scene{
         this.load.image('title_registro', 'images/gui/title_registro.png');
         this.load.image('bg_elipse', '/images/gui/bg_elipse.png');
         this.load.image('pet_1', 'images/gui/pet1.png');
+        this.load.image('pet_1_lg', 'images/gui/pet_1_lg.png');
         this.load.image('pet_2', 'images/gui/pet2.png');
         this.load.image('pet_3', 'images/gui/pet3.png');
 
@@ -55,12 +56,21 @@ export class mainScene extends Phaser.Scene{
         this.load.image('head_35', 'images/gui/heads/head_35.png');
         this.load.image('head_36', 'images/gui/heads/head_36.png');
 
+        //sort teams
+        this.load.image('title_equipos', 'images/gui/equipos.png');
+
+        //presentacion
+        this.load.image('title_presentacion', 'images/gui/presentacion.png');
+
         //generic
         this.load.image('btn_sm_green', 'images/gui/btn_sm_green.png');
         this.load.image('btn_sm_red', 'images/gui/btn_sm_red.png');
         this.load.image('bg_modal', 'images/gui/bg_modal.png');
         this.load.image('btn_lg_green', 'images/gui/btn_lg_green.png');
         this.load.image('btn_lg_white', 'images/gui/btn_lg_white.png');
+
+
+
 
 
     }
