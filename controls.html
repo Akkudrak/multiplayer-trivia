@@ -527,6 +527,24 @@
             receiveTeam(data)
         });
 
+
+        Client.socket.on('receiveTopic',function(data){
+            //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
+            console.log("El tema sera: ",data);
+            localStorage.setItem('topic', data.topic);
+            localStorage.setItem('questList', JSON.stringify(data.questList));
+
+            receiveTopic()
+        });
+
+
+        Client.socket.on('showAnswer',function(data){
+            //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
+            localStorage.setItem('momentAnswer',true);
+            showAnswer()
+        });
+
+
         // localStorage.clear();
         if(!localStorage.getItem('idTeam')){
             Client.socket.emit('joinPlayer');
@@ -536,33 +554,36 @@
 
 
         var guild;
-        var usedGuild = [];
+        var idPlayer;
         function receiveTeam(){
-            // console.log(data);
-            // let position;
-            // console.log(localStorage.getItem('id'));
-            // if(usedGuild.length > 0){
-                // guild = data.players[usedGuild.length];
-            //     position = usedGuild.length;
-            // }else{
+            if(idPlayer != ''){
                 dataInfo = localStorage.getItem('dataInfo');
                 idPlayer = localStorage.getItem('idTeam');
                 guild = JSON.parse(dataInfo);
-                // position = localStorage.getItem('id')-1;
-            // }
-            // Client.socket.emit('usedTeam', position);
+            }
         }
 
         Client.socket.on('testTeams',function(data){
             //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
-            // console.log("testTeams",data);
-            receivePositionUsed(data)
+            // receivePositionUsed(data)
         });
 
 
-    function receivePositionUsed(data){
-        usedGuild.push(data);
-        console.log('usados',usedGuild);
+    // function receivePositionUsed(data){
+    //     usedGuild.push(data);
+    //     console.log('usados',usedGuild);
+    // }
+    var topic;
+    var questList;
+    function receiveTopic(data){
+        if(topic != ''){
+            topic = localStorage.getItem('topic');
+            questList = JSON.parse(localStorage.getItem('questList'));
+        }
+    }
+    var receiveAnswer;
+    function showAnswer(){
+        receiveAnswer = true;
     }
 
     </script>

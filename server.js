@@ -104,7 +104,15 @@ var users=[
         "Juan Carlos Zúñiga"
     ]
 ];
-
+var quesList = {
+        'question':'¿En qué museo se encuentra la obra original La noche estrellada, de Van Gogh?',
+        'trueAnswer':1,
+        'answers':[
+            'Fleur de lis',
+            'Arte Moderno en NY',
+            'Priorato de Sion'
+        ]
+    };
 
 app.use('/images',express.static(__dirname + '/images'));
 app.use('/lib',express.static(__dirname + '/lib'));
@@ -193,13 +201,23 @@ io.on('connection',function(socket){
         socket.broadcast.emit('userReadyView',select);
     })
 
-    
     socket.on('testTeams',function(prizes){
         
         console.log(users);
         // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
         socket.broadcast.emit('testTeams',{name:"Team 1",players:users}); //Todos menos el emisor! MEGAFONO PLATA
     });
+    socket.on('sendTopic',function(questions){
+        
+        // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
+        socket.broadcast.emit('receiveTopic',{topic:"Artes",questList:quesList}); //Todos menos el emisor! MEGAFONO PLATA
+    });
+
+    socket.on('sendAnswer',function(questions){
+        // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
+        socket.broadcast.emit('showAnswer',true); //Todos menos el emisor! MEGAFONO PLATA
+    });
+
 
     socket.on('reset',function(){
         console.log("reset");

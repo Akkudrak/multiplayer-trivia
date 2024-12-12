@@ -78,6 +78,13 @@
         Client.socket.emit('testTeams');
     };
 
+    Client.sendTopic = function(){
+        Client.socket.emit('sendTopic');
+    };
+    Client.sendTopic = function(){
+        Client.socket.emit('sendAnwser');
+    };
+    
     Client.sendReset = function(){
         Client.socket.emit('reset');
     };
@@ -119,6 +126,8 @@
     Client.socket.on('userReadyView',function(data){
         console.log('El usuario de equipo esta listo',data)
     });
+
+    
 
     
 
