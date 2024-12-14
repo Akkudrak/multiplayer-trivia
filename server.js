@@ -201,6 +201,11 @@ io.on('connection',function(socket){
         socket.broadcast.emit('userReadyView',select);
     })
 
+    socket.on('sendSolution',function(finishInfo){
+        console.log(finishInfo);
+        socket.broadcast.emit('receiveSolution',finishInfo);
+    })
+
     socket.on('testTeams',function(prizes){
         
         console.log(users);
@@ -218,6 +223,12 @@ io.on('connection',function(socket){
         socket.broadcast.emit('showAnswer',true); //Todos menos el emisor! MEGAFONO PLATA
     });
 
+    socket.on('sendResults',function(questions){
+        // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
+        socket.broadcast.emit('receiveResults',true); //Todos menos el emisor! MEGAFONO PLATA
+    });
+
+    
 
     socket.on('reset',function(){
         console.log("reset");

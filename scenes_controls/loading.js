@@ -42,25 +42,25 @@ export class Loading extends Phaser.Scene{
                     this.avaliableMembers = JSON.parse(localStorage.getItem('avaliableMembers'));
                     // console.log('sacados del local', this.avaliableMembers)
                     
+                    // console.log(this.avaliableMembers);
+                    // console.log(this.selectedUser);
                     this.avaliableMembers.forEach((pos,stp) => {
                         localVar[stp] = pos['val'];
                     })
                     guild.forEach((el,idx) => {
-                        this.guildsInfo[idx] = { name: el, used: false, score:0, ready:false };
+                        this.guildsInfo[idx] = { name: el, id:idx,used: false, score:0, ready:false };
                         if(!localVar.includes(idx)){
                             this.guildsInfo[idx]['used'] = true;
                         }
                     })
                 }else{
                     guild.forEach((el,idx) => {
-                        this.guildsInfo[idx] = { name: el, used: false, score:0, ready:false };
+                        this.guildsInfo[idx] = { name: el, id:idx,used: false, score:0, ready:false };
                         this.avaliableMembers[idx] = {val:idx};
-                        
                     })
+                    localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
 
                 }
-            
-
                 
                     this.tweens.add({
                         targets: this.loadingMoment,
@@ -81,6 +81,7 @@ export class Loading extends Phaser.Scene{
 
         if(localStorage.getItem('selectedMember') && !localStorage.getItem('topic')){
             if(this.saveUser === false){
+                // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
                 this.saveUser = true;
                 this.selectedUser = JSON.parse(localStorage.getItem('selectedMember'));
                 setTimeout(() => {
@@ -440,22 +441,23 @@ export class Loading extends Phaser.Scene{
     showQuestion(){
         let centerSpecial = 0;
         let quest = JSON.parse(localStorage.getItem('questList'));
-        let lorem = quest['question'];
-        // let lorem  = 'El país con una extensión más pequeña, ocupando solo 0,49 kilómetros cuadrados, lo encontramos en Italia y recibe el nombre de Ciudad o Estado Vaticano, donde reside el Papa de la Iglesia Católica.'
-        lorem = lorem.split(' ');
-        let loremResult = '';
-        lorem.forEach((el,idx) => {
-            if(idx == 0){
-                loremResult += '\n'+el+' ';
-            }else if(idx % 4 === 0 ){
-                loremResult += ' '+el+'\n';
-            }else if(idx == lorem.length-1){
-                loremResult += ''+el+'\n';
-            }else{
-                loremResult += ' '+el+' ';
-            }
-        })
+        // let lorem = quest['question'];
+        let loremResult  = 'El país con una extensión más pequeña, ocupando solo 0,49 kilómetros cuadrados, lo encontramos en Italia y recibe el nombre de Ciudad o Estado Vaticano, donde reside el Papa de la Iglesia Católica.'
+        // lorem = lorem.split(' ');
+        // let loremResult = '';
+        // lorem.forEach((el,idx) => {
+        //     if(idx == 0){
+        //         loremResult += '\n'+el+' ';
+        //     }else if(idx % 4 === 0 ){
+        //         loremResult += ' '+el+'\n';
+        //     }else if(idx == lorem.length-1){
+        //         loremResult += ''+el+'\n';
+        //     }else{
+        //         loremResult += ' '+el+' ';
+        //     }
+        // })
 
+        
         this.questionNow = this.add.text(window.innerWidth/2, window.innerHeight/2-(window.innerHeight/12),
             loremResult, {
                 fontSize: '3rem ',
@@ -464,8 +466,10 @@ export class Loading extends Phaser.Scene{
                 align: "center",
                 stroke: '#2f4649',
                 strokeThickness: 18,
+                wordWrap: { width: window.innerWidth-50, useAdvancedWrap: true }
             }).setOrigin(0.5,0.5).setDepth(2);
-        this.squareQuest = this.add.rectangle(this.questionNow.x,this.questionNow.y,window.innerWidth,this.questionNow.displayHeight,0xFFFFFF,0.5).setOrigin(0.5,0.5);
+            this.questionNow.setPadding(30,30);
+            this.squareQuest = this.add.rectangle(this.questionNow.x,this.questionNow.y,window.innerWidth,this.questionNow.displayHeight,0xFFFFFF,0.5).setOrigin(0.5,0.5);
 
         let posIni = (this.squareQuest.y+this.squareQuest.displayHeight/2);
         let middlePos = window.innerHeight - posIni;
@@ -510,7 +514,7 @@ export class Loading extends Phaser.Scene{
                     repeat:1,
                     onComplete: () => {
                         console.log('Elegiste a bulbasur');
-                        this.selectAnswer(this.optionsQuest[idx],idx,infoQuest);
+                        this.selectAnswer(el,idx,infoQuest);
                     }
                 });
 
@@ -518,15 +522,74 @@ export class Loading extends Phaser.Scene{
         })
     }
     selectAnswer(option, position,info){
+        let centerSpecial = 0;
+        this.guildsInfo = new Array;
         console.log(option);
         console.log(position);
         console.log(localStorage.getItem('questList'));
+        let posIni = (this.squareQuest.y+this.squareQuest.displayHeight/2);
+        let middlePos = window.innerHeight - posIni;
+        centerSpecial = window.innerHeight - middlePos/2;
+        var localVar = [];
+        this.optionsQuest.forEach((el,idx) => {
+            this.optionsQuest[idx].destroy();
+            this.optionsQuest[idx]['icon'].destroy();
+        })
+        this.loadingScreen('show',0,centerSpecial);
         
+        if(localStorage.getItem('avaliableMembers')){
+            // console.log(localStorage.getItem('avaliableMembers'));
+            this.avaliableMembers = JSON.parse(localStorage.getItem('avaliableMembers'));
+            
+            // this.avaliableMembers.forEach((pos,stp) => {
+            //     localVar[stp] = pos['val'];
+            // });
+            // JSON.parse(localStorage.getItem('dataInfo')).forEach((el,idx) => {
+            //     this.guildsInfo[idx] = { name: el, id:idx,used: false, score:0, ready:false };
+            //     if(!localVar.includes(idx)){
+            //         this.guildsInfo[idx]['used'] = true;
+            //     }
+            // });
+            // guild.forEach((el,idx) => {
+            //     this.guildsInfo[idx] = { name: el, id:idx,used: false, score:0, ready:false };
+            //     if(!localVar.includes(idx)){
+            //         this.guildsInfo[idx]['used'] = true;
+            //     }
+            // })
+            
+        }
+        
+
         if(position == info['trueAnswer']){
+            var nameSelected = this.selectedUser['name'];
+            this.avaliableMembers.splice(this.selectedUser['id'], 1);
+            // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
+            // if(localStorage.getItem('winners')){
+            //     let winna = JSON.parse(localStorage.getItem('winners'));
+            //     winna.push(nameSelected);
+            //     localStorage.setItem('winners',JSON.stringify(winna));
+            // }else{
+            //     let winna = {
+            //         nameSelected
+            //     };
+            //     localStorage.setItem('winners',JSON.stringify(winna));
+            // }
+            Client.socket.emit('sendSolution',{
+                user: JSON.parse(localStorage.getItem('selectedMember')),
+                answer: option,
+                valid: true,
+                time: Date.now(),
+            });
             console.log('ganaste :3');
         }else{
-            console.log('perdiste :(');
+            Client.socket.emit('sendSolution',{
+                user: JSON.parse(localStorage.getItem('selectedMember')),
+                answer: option,
+                valid: false,
+                time: Date.now(),
+            });
         }
+        
     }
 }
 

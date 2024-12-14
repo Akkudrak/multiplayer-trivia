@@ -89,6 +89,10 @@
         Client.socket.emit('reset');
     };
 
+    Client.sendResults = function(){
+        Client.socket.emit('sendResults');
+    };
+
 
 
     Client.sendendGame = function(prizes){
@@ -123,17 +127,38 @@
         cross[data.id].y=mid_v;
     });
 
+    var usersActive = [];
     Client.socket.on('userReadyView',function(data){
         console.log('El usuario de equipo esta listo',data)
+        usersActive.push(data);
     });
-
-    
-
-    
 
     Client.socket.on('dispense',function(data){
         console.log("endgame");
         endGame();
+    });
+    var scoreBoardLap = [];
+    Client.socket.on('receiveSolution',function(data){
+        console.log("recibiendo respuesta");
+        console.log(data);
+        scoreBoardLap.push(data);
+
+    
+        if(scoreBoardLap.length == usersActive.length){
+            let timing = [];
+
+            scoreBoardLap.forEach((el) => {
+                timing.push(el.time);
+            })
+            
+            console.log(timing);
+
+            
+
+            // Client.socket.emit('sendResults');
+        }
+
+        // endGame();
     });
 
     var characterList = [];

@@ -544,6 +544,16 @@
             showAnswer()
         });
 
+        Client.socket.on('receiveResults',function(data){
+            //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
+
+            console.log('recibiendo datos de resultados');
+
+            // localStorage.setItem('momentAnswer',true);
+            // showAnswer()
+        });
+
+        
 
         // localStorage.clear();
         if(!localStorage.getItem('idTeam')){
