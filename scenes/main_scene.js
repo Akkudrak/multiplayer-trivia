@@ -62,6 +62,25 @@ export class mainScene extends Phaser.Scene{
         //presentacion
         this.load.image('title_presentacion', 'images/gui/presentacion.png');
 
+        //selectParticipants
+        this.load.image('playerSel_desk', 'images/gui/playerSel_desk.png');
+        this.load.image('icon_no', 'images/gui/icon_no.png');
+        this.load.image('icon_ok', 'images/gui/icon_ok.png');
+        this.load.image('icon_wait', 'images/gui/icon_wait.png');
+
+        //roulette
+        this.load.image('wheel', 'images/gui/wheel.png');
+        this.load.image('needle', 'images/gui/needle.png');
+        this.load.image('ciencia', 'images/gui/ciencia.png');
+        this.load.image('geografia', 'images/gui/geografia.png');
+        this.load.image('matematicas', 'images/gui/matematicas.png');
+        this.load.image('historia', 'images/gui/historia.png');
+        this.load.image('cine', 'images/gui/cine.png');
+        this.load.image('musica', 'images/gui/musica.png');
+        this.load.image('arte', 'images/gui/arte.png');
+        this.load.image('deportes', 'images/gui/deportes.png');
+        this.load.image('seleccionando', 'images/gui/seleccionando.png');
+
         //generic
         this.load.image('btn_sm_green', 'images/gui/btn_sm_green.png');
         this.load.image('btn_sm_red', 'images/gui/btn_sm_red.png');
@@ -83,7 +102,9 @@ export class mainScene extends Phaser.Scene{
 
         this.add.image(mid_h, mid_v+(mid_mid_v/2), 'mono_1').setOrigin(.5,.5).setScale(scale);
         this.setButton({scene:this, x:mid_h,y:(w_height-(mid_mid_v/2)),text:"Comenzar",scale_c:scale}).setInteractive().on("pointerdown", () => {
-            this.scene.start("waiting_scene");
+            this.scene.start("roulette_scene");
+            //this.scene.start("waiting_scene");
+            //this.scene.start("quiz_scene");
         });;
 
 

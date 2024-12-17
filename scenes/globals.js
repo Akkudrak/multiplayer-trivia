@@ -1,4 +1,4 @@
-
+    var game=undefined;
         var demo=false;
         var w_width=window.innerWidth;
         var w_height=window.innerHeight;
@@ -175,7 +175,7 @@
 
         var synthesis = window.speechSynthesis;
             var utterance = new SpeechSynthesisUtterance("");
-            utterance.pitch=1.5;
+            utterance.pitch=1.6;
             utterance.rate=1.1;
 
         setTimeout(()=>{
