@@ -537,7 +537,7 @@ export class Loading extends Phaser.Scene{
         })
     }
     showResult(){
-        this.loadingScreen('show',0,-window.innerHeight/2);
+        
         this.questionNow.destroy();
         this.squareQuest.destroy();
         this.optionsQuest.forEach((el,idx) => {
@@ -556,6 +556,7 @@ export class Loading extends Phaser.Scene{
                     color: '#ffffff',
                     stroke: '#2f4649',
                     strokeThickness: 18,
+                    align:"center",
                     wordWrap: { width: window.innerWidth-50, useAdvancedWrap: true }
                 }).setOrigin(0.5,0.5).setDepth(5)
                 this.tweens.add({
@@ -573,7 +574,7 @@ export class Loading extends Phaser.Scene{
 
                 this.finishEvent = this.add.image(window.innerWidth/2,window.innerHeight-(window.innerHeight/5),'btnGreen').setScale(1.5).setOrigin(0.5,0.5).setInteractive();
                 this.finishEventText = this.add.text(0, 0,
-                'Repetir', {
+                'Finalizar', {
                     fontSize: '3rem ',
                     fontFamily: "MikadoBold",
                     color: '#FFFFFF',
@@ -582,10 +583,10 @@ export class Loading extends Phaser.Scene{
                 this.finishEventText.x = this.finishEvent.x - this.finishEventText.displayWidth/8;
                 this.finishEventText.y = this.finishEvent.y - this.finishEventText.displayWidth/8;
 
-
+                this.loadingScreen('show',0,-window.innerHeight/2);
                 this.tryAgain = this.add.image(window.innerWidth/2,window.innerHeight-(window.innerHeight/10),'btnGreen').setScale(1.5).setOrigin(0.5,0.5).setInteractive();
                 this.tryAgainText = this.add.text(0, 0,
-                'Finalizar', {
+                'Repetir', {
                     fontSize: '3rem ',
                     fontFamily: "MikadoBold",
                     color: '#FFFFFF',
@@ -595,7 +596,34 @@ export class Loading extends Phaser.Scene{
                 this.tryAgainText.y = this.tryAgain.y - this.tryAgainText.displayWidth/8;
                 
                 this.finishEvent.on('pointerdown',(pointer) => {
+                    this.tryAgain.destroy();
+                    this.tryAgainText.destroy();
+                    this.finishEvent.destroy();
+                    this.finishEventText.destroy();
+                    this.playerSelectedAutor.destroy();
 
+                    this.ResultTitle.destroy();
+                    this.ResultTitle.destroy();
+                    this.playerSelectedTitle.destroy();
+                    this.DNI.destroy();
+                    this.thankyou = this.add.text(window.innerWidth/2, window.innerHeight/2,
+                        'GRACIAS\nPOR JUGAR', {
+                            fontSize: '3rem ',
+                            fontFamily: "MikadoBold",
+                            color: '#FFFFFF',
+                            stroke: '1px',
+                            stroke: '#2f4649',
+                            strokeThickness: 18,
+                            align:"center"
+                        }).setOrigin(0.5,0.5);
+
+                });
+
+                this.tryAgain.on('pointerdown',(pointer) => {
+                    this.ResultTitle.destroy();
+                    this.playerSelectedTitle.destroy();
+                    this.DNI.destroy();
+                    this.showGuild();
                 });
 
 
@@ -607,10 +635,9 @@ export class Loading extends Phaser.Scene{
         let centerSpecial = 0;
         this.guildsInfo = new Array;
 
-
-        console.log("option",option);
-        console.log("position",position);
-        console.log("info",info);
+        // console.log("option",option);
+        // console.log("position",position);
+        // console.log("info",info);
         console.log(localStorage.getItem('questList'));
         let posIni = (this.squareQuest.y+this.squareQuest.displayHeight/2);
         let middlePos = window.innerHeight - posIni;
@@ -644,7 +671,7 @@ export class Loading extends Phaser.Scene{
             
         }
         
-        if(option == ''){
+        if(info['trueAnswer']){
             if(position == info['trueAnswer']){
                 var nameSelected = this.selectedUser['name'];
                 this.avaliableMembers.splice(this.selectedUser['id'], 1);

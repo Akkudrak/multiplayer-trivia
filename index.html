@@ -150,14 +150,15 @@
     
         if(scoreBoardLap.length == usersActive.length){
             let timing = [];
+            var winner = false;
 
             scoreBoardLap.forEach((el) => {
                 timing.push(el.time);
             })
-            
             timing.forEach((el,idx) => {
                 if(el == scoreBoardLap[idx]['time']){
-                    if(scoreBoardLap[idx]['valid'] == true && resultsGamers.length == 0){
+                    if(scoreBoardLap[idx]['valid'] == true && winner === false){
+                        winner = true;
                         console.log('gano la persona', scoreBoardLap[idx]);
                         let tempResult = {
                             name: scoreBoardLap[idx].user.name,
