@@ -10,8 +10,6 @@ import {quiz_scene} from "/scenes/quiz_scene.js";
 
 
 
-
-
 const config = {
     type: Phaser.AUTO,
     width: w_width,

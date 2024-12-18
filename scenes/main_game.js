@@ -9,10 +9,10 @@ class Example extends Phaser.Scene
                
                 this.sound.pauseOnBlur = false;//Esta roña evita que el sonido se detenga cuando la ventana pierde foco.
 
-                this.load.image('background', 'images/bg.jpg');
-                this.load.image('touch', 'images/touch_zone.png');
-                this.load.image('marble', 'images/marble.png');
-                this.load.image('yellow', 'images/yellow.png');
+                this.load.image('background', '/images/bg.jpg');
+                this.load.image('touch', '/images/touch_zone.png');
+                this.load.image('marble', '/images/marble.png');
+                this.load.image('yellow', '/images/yellow.png');
 
                 this.load.image('square_green', 'images/square_green.png');
                 this.load.image('square_yellow', 'images/square_yellow.png');
