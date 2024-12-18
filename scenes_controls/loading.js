@@ -618,7 +618,7 @@ export class Loading extends Phaser.Scene{
                 this.tryAgainText.y = this.tryAgain.y - this.tryAgainText.displayWidth/8;
                 
                 this.finishEvent.on('pointerdown',(pointer) => {
-                    
+
                 });
 
 
@@ -629,8 +629,11 @@ export class Loading extends Phaser.Scene{
     selectAnswer(option, position,info){
         let centerSpecial = 0;
         this.guildsInfo = new Array;
-        console.log(option);
-        console.log(position);
+
+
+        console.log("option",option);
+        console.log("position",position);
+        console.log("info",info);
         console.log(localStorage.getItem('questList'));
         let posIni = (this.squareQuest.y+this.squareQuest.displayHeight/2);
         let middlePos = window.innerHeight - posIni;
@@ -664,27 +667,34 @@ export class Loading extends Phaser.Scene{
             
         }
         
-
-        if(position == info['trueAnswer']){
-            var nameSelected = this.selectedUser['name'];
-            this.avaliableMembers.splice(this.selectedUser['id'], 1);
-            // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
-            // if(localStorage.getItem('winners')){
-            //     let winna = JSON.parse(localStorage.getItem('winners'));
-            //     winna.push(nameSelected);
-            //     localStorage.setItem('winners',JSON.stringify(winna));
-            // }else{
-            //     let winna = {
-            //         nameSelected
-            //     };
-            //     localStorage.setItem('winners',JSON.stringify(winna));
-            // }
-            Client.socket.emit('sendSolution',{
-                user: JSON.parse(localStorage.getItem('selectedMember')),
-                answer: option,
-                valid: true,
-            });
-            console.log('ganaste :3');
+        if(option == ''){
+            if(position == info['trueAnswer']){
+                var nameSelected = this.selectedUser['name'];
+                this.avaliableMembers.splice(this.selectedUser['id'], 1);
+                // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
+                // if(localStorage.getItem('winners')){
+                //     let winna = JSON.parse(localStorage.getItem('winners'));
+                //     winna.push(nameSelected);
+                //     localStorage.setItem('winners',JSON.stringify(winna));
+                // }else{
+                //     let winna = {
+                //         nameSelected
+                //     };
+                //     localStorage.setItem('winners',JSON.stringify(winna));
+                // }
+                Client.socket.emit('sendSolution',{
+                    user: JSON.parse(localStorage.getItem('selectedMember')),
+                    answer: option,
+                    valid: true,
+                });
+                console.log('ganaste :3');
+            }else{
+                Client.socket.emit('sendSolution',{
+                    user: JSON.parse(localStorage.getItem('selectedMember')),
+                    answer: option,
+                    valid: false,
+                });
+            }
         }else{
             Client.socket.emit('sendSolution',{
                 user: JSON.parse(localStorage.getItem('selectedMember')),
@@ -692,7 +702,6 @@ export class Loading extends Phaser.Scene{
                 valid: false,
             });
         }
-        
     }
 }
 
