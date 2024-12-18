@@ -46,6 +46,8 @@ export class roulette_scene extends Phaser.Scene{
                 isSpinning = false;
                 spinSpeed = 0;
                 imageCategory.setTexture(prizes[resultIndex]);
+                console.log(prizes[resultIndex]);
+                
                 setTimeout(()=>{
                     this.scene.start("quiz_scene",{theme: prizes[resultIndex] });
                 },1500)

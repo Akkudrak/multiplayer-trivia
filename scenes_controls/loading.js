@@ -430,19 +430,22 @@ export class Loading extends Phaser.Scene{
             }).setOrigin(0.5,0.5);
             this.startQuestText.x = this.startQuest.x - this.startQuestText.displayWidth/8;
             this.startQuestText.y = this.startQuest.y - this.startQuestText.displayWidth/8;
-        this.startQuest.on('pointerdown',(pointer) => {
-            this.startQuestText.setAlpha(0);
-            this.startQuest.setAlpha(0);
-            this.iconCategory.setAlpha(0);
-            this.catTitle.setAlpha(0);
-            this.showQuestion();
-        })
+        // this.startQuest.on('pointerdown',(pointer) => {
+
+            setTimeout(() =>{
+                this.startQuestText.setAlpha(0);
+                this.startQuest.setAlpha(0);
+                this.iconCategory.setAlpha(0);
+                this.catTitle.setAlpha(0);
+                this.showQuestion();
+            },2000)
+        // })
     }
     showQuestion(){
         let centerSpecial = 0;
         let quest = JSON.parse(localStorage.getItem('questList'));
-        // let lorem = quest['question'];
-        let loremResult  = 'El país con una extensión más pequeña, ocupando solo 0,49 kilómetros cuadrados, lo encontramos en Italia y recibe el nombre de Ciudad o Estado Vaticano, donde reside el Papa de la Iglesia Católica.'
+        // let lorem = ;
+        let loremResult  = quest['question'];
         // lorem = lorem.split(' ');
         // let loremResult = '';
         // lorem.forEach((el,idx) => {
@@ -491,21 +494,22 @@ export class Loading extends Phaser.Scene{
         let middlePos = window.innerHeight - posIni;
 
         this.optionsQuest = [];
-        
+        this.loadingScreen('show','',-window.innerHeight/2);
         infoQuest['answers'].forEach((el,idx) => {
             
             this.optionsQuest[idx] = this.add.text(window.innerWidth/2, (window.innerHeight - (middlePos/1.25) +  + ((middlePos/3.5)*idx)),
                 el, {
                     fontSize: '2.5rem ',
                     fontFamily: "MikadoBold",
-                    color: '#7d282a',
-                    stroke: '1px'
-                }).setOrigin(0.5,0.5).setDepth(2);
-            this.optionsQuest[idx]['icon'] = this.add.image(window.innerWidth/2, (window.innerHeight - (middlePos/1.25) +  + ((middlePos/3.5)*idx)),'res').setOrigin(0.5,0.5).setScale(1.5).setInteractive();
-            this.optionsQuest[idx]['icon'].on('pointerdown',(pointer) => {
+                    color: '#ffffff',
+                    stroke: '#2f4649',
+                    strokeThickness: 18,
+                }).setOrigin(0.5,0.5).setDepth(2).setInteractive();
+            // this.optionsQuest[idx]['icon'] = this.add.image(window.innerWidth/2, (window.innerHeight - (middlePos/1.25) +  + ((middlePos/3.5)*idx)),'res').setOrigin(0.5,0.5).setScale(1.5).setInteractive();
+            this.optionsQuest[idx].on('pointerdown',(pointer) => {
 
                 this.tweens.add({
-                    targets: this.optionsQuest[idx]['icon'],
+                    targets: this.optionsQuest[idx],
                     tint: 0xff0000,
                     duration: 100,
                     ease: 'Quad.easeInOut',     
@@ -533,7 +537,7 @@ export class Loading extends Phaser.Scene{
         var localVar = [];
         this.optionsQuest.forEach((el,idx) => {
             this.optionsQuest[idx].destroy();
-            this.optionsQuest[idx]['icon'].destroy();
+            // this.optionsQuest[idx]['icon'].destroy();
         })
         this.loadingScreen('show',0,centerSpecial);
         
@@ -578,7 +582,6 @@ export class Loading extends Phaser.Scene{
                 user: JSON.parse(localStorage.getItem('selectedMember')),
                 answer: option,
                 valid: true,
-                time: Date.now(),
             });
             console.log('ganaste :3');
         }else{
@@ -586,7 +589,6 @@ export class Loading extends Phaser.Scene{
                 user: JSON.parse(localStorage.getItem('selectedMember')),
                 answer: option,
                 valid: false,
-                time: Date.now(),
             });
         }
         

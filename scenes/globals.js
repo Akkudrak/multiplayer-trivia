@@ -10,6 +10,8 @@
         var scale=1.4;
 
 
+        var receiveMembers = [];
+        var usersActive = [];
 
         var start=false;
         var stay=false;

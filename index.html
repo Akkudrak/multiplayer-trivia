@@ -66,7 +66,7 @@
 </script>
 </body>
 <script>
-
+    
 // generateTeams();
         // for (var i = 0; i < 10; i++) {
         //     generateImages("team_"+(i+1)+"_img");
@@ -84,7 +84,7 @@
         Client.socket.emit('sendTopic');
     };
     Client.sendTopic = function(){
-        Client.socket.emit('sendAnwser');
+        Client.socket.emit('sendAnswer');
     };
     
     Client.sendReset = function(){
@@ -129,7 +129,7 @@
         cross[data.id].y=mid_v;
     });
 
-    var usersActive = [];
+    
     Client.socket.on('userReadyView',function(data){
         console.log('El usuario de equipo esta listo',data)
         usersActive.push(data);
@@ -142,6 +142,7 @@
     var scoreBoardLap = [];
     Client.socket.on('receiveSolution',function(data){
         console.log("recibiendo respuesta");
+        data.time = Date.now();
         console.log(data);
         scoreBoardLap.push(data);
 
@@ -166,7 +167,8 @@
     var characterList = [];
     Client.socket.on('selectedCharacter',function(data){
 
-        characterList.push(data);
+        receiveMembers.push(data);
+        // characterList.push(data);
         console.log(data);
         //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
         // console.log("testTeams",data);

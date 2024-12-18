@@ -102,8 +102,8 @@ export class mainScene extends Phaser.Scene{
 
         this.add.image(mid_h, mid_v+(mid_mid_v/2), 'mono_1').setOrigin(.5,.5).setScale(scale);
         this.setButton({scene:this, x:mid_h,y:(w_height-(mid_mid_v/2)),text:"Comenzar",scale_c:scale}).setInteractive().on("pointerdown", () => {
-            this.scene.start("roulette_scene");
-            //this.scene.start("waiting_scene");
+            // this.scene.start("roulette_scene");
+            this.scene.start("waiting_scene");
             //this.scene.start("quiz_scene");
         });;
 

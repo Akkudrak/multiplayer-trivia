@@ -12,10 +12,10 @@ export class waiting_scene extends Phaser.Scene{
 
 
         const main = this.scene.get('mainScene');
-
+        
         main.setButton({scene:this, x:mid_h,y:(w_height-(mid_mid_v/4)),text:"Armar Equipos",scale_c:1.2}).setInteractive().on("pointerdown", () => {
             this.scene.start("sorting_scene");
-        });;
+        });
     }
 
     drawUsers(){

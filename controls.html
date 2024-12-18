@@ -327,7 +327,7 @@
         var playerColor="";
         Client.socket.on('setID',function(data){
             localStorage.setItem("idTeam", data.id);
-            localStorage.setItem("dataInfo", JSON.stringify(data.info[(data.id-1)]));
+            // localStorage.setItem("dataInfo", JSON.stringify(data.info[(data.id-1)]));
             
         });
 
@@ -371,9 +371,9 @@
             allPlayers=data;  
         });
 
-        Client.socket.on('testTeams',function(data){
-        console.log("testTeams",data);
-    });
+        // Client.socket.on('testTeams',function(data){
+        //     console.log("testTeams",data);
+        // });
 
         
 
@@ -523,7 +523,9 @@
     
         Client.socket.on('testTeams',function(data){
             //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
-            // console.log("testTeams",data);
+            console.log("testTeams",data);
+            let idTemp = localStorage.getItem("idTeam");
+            localStorage.setItem("dataInfo", JSON.stringify(data.players[(idTemp-1)]));
             receiveTeam(data)
         });
 
@@ -531,6 +533,7 @@
         Client.socket.on('receiveTopic',function(data){
             //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
             console.log("El tema sera: ",data);
+            
             localStorage.setItem('topic', data.topic);
             localStorage.setItem('questList', JSON.stringify(data.questList));
 
@@ -555,17 +558,18 @@
 
         
 
-        // localStorage.clear();
-        if(!localStorage.getItem('idTeam')){
-            Client.socket.emit('joinPlayer');
-        }else{
-            receiveTeam();
-        }
+        localStorage.clear();
+        // if(!localStorage.getItem('idTeam')){
+        //     Client.socket.emit('joinPlayer');
+        // }else{
+        //     receiveTeam();
+        // }
 
 
         var guild;
         var idPlayer;
         function receiveTeam(){
+            console.log('deberia iniciar este.');
             if(idPlayer != ''){
                 dataInfo = localStorage.getItem('dataInfo');
                 idPlayer = localStorage.getItem('idTeam');
@@ -573,10 +577,10 @@
             }
         }
 
-        Client.socket.on('testTeams',function(data){
-            //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
-            // receivePositionUsed(data)
-        });
+        // Client.socket.on('testTeams',function(data){
+        //     //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
+        //     // receivePositionUsed(data)
+        // });
 
 
     // function receivePositionUsed(data){

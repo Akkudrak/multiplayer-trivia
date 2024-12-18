@@ -12,107 +12,16 @@ var io = require('socket.io').listen(server);
 var players=[];
 var maxPlayers=8;
 
-var users=[
-    [
-        "Daniel Sandoval",
-        "Oscar Alvarez",
-        "Sandra Vera",
-        "Lerings Rodríguez",
-        "Sonia Marin",
-        "Alfredo Pérez",
-        "Alejandro Vargas"
-    ],
-    [
-        "Hernán Lucas",
-        "Iván Méndez",
-        "Adolfo Soria",
-        "Marco Hernández",
-        "Karina Jiménez",
-        "Estefanía Carrera",
-        "Rodrigo Gonzalez"
-    ],
-    [
-        "Sergio Molina",
-        "Kasandra López",
-        "José Zamora",
-        "Bernardo Guerrero",
-        "Aarón Cervantes",
-        "Victor Corona",
-        "Arturo Molina"
-    ],
-    [
-        "Graciela",
-        "Jaime Ortiz",
-        "Guillermo Ortiz",
-        "Carlos Espinoza",
-        "Oscar Saucedo",
-        "Marisela Sánchez",
-        "Karen Marín"
-    ],
-    [
-        "Aldo Eric Bahena",
-        "Rubén Díaz",
-        "Eduardo Beltran",
-        "Alberto Santiago",
-        "Estephania Krauletz",
-        "Jenny Avelino",
-        "Francisco Veneros"
-    ],
-    [
-        "Rafael Alcalá",
-        "Christian Mercado",
-        "Santa Flores",
-        "Beatriz Huerta",
-        "Angel Gamboa",
-        "Abraham Amaya",
-        "Ricardo Daniel Gómez"
-    ],
-    [
-        "Jonathan Cabrera",
-        "Gabriel De Jesús ",
-        "Flor Evangelina Sandoval",
-        "Alan Yael Hernández",
-        "Adriana Alonso",
-        "Erik Anthony Sánchez",
-        "Gustavo Cesar Valero"
-    ],
-    [
-        "Armando Cuevas",
-        "Alberto Sánchez",
-        "Wulfrano Castillo",
-        "Daniel Martin González",
-        "Grecia Valentino",
-        "Sergio Ivan Espitia",
-        "Francisco Javier Martinez"
-    ],
-    [
-        "Maria Guadalupe Garcia",
-        "Jorge Brian Nava",
-        "Eduardo Hernández",
-        "Evelyn Deniss Gallegos",
-        "Wendy Elizabeth Argumedo",
-        "Karla Paola Arredondo",
-        "Cristobal Ramos"
-    ],
-    [
-        "Reyna Marisol Tovar",
-        "Pablo Cureño",
-        "Héctor Leonardo Ramos",
-        "Diego Armando Ariza",
-        "Anthony Mendoza",
-        "Brian Sanchez",
-        "Juan Carlos Zúñiga"
-    ]
-];
-var quesList = {
-        'question':'¿En qué museo se encuentra la obra original La noche estrellada, de Van Gogh?',
-        'trueAnswer':1,
-        'answers':[
-            'Fleur de lis',
-            'Arte Moderno en NY',
-            'Priorato de Sion'
-        ]
-    };
+var users = [];
+// var quesList = {
+//         'question':'¿En qué museo se encuentra la obra original La noche estrellada, de Van Gogh?',
+//         'trueAnswer':1,
+//         'answers':[
+//             'Fleur de lis',
+//             'Arte Moderno en NY',
+//             'Priorato de Sion'
+//         ]
+//     };
 
 app.use('/images',express.static(__dirname + '/images'));
 app.use('/lib',express.static(__dirname + '/lib'));
@@ -144,10 +53,19 @@ io.on('connection',function(socket){
         if (server.lastPlayderID<11) {
             console.log("createTarget");
             console.log(server.lastPlayderID);
-            socket.targetPlayer = {
-                id: server.lastPlayderID,
-                info:users,
-            };
+
+            if(users.length > 0){
+                socket.targetPlayer = {
+                    id: server.lastPlayderID,
+                    info:users,
+                };
+            }else{
+                socket.targetPlayer = {
+                    id: server.lastPlayderID,
+                };
+            }
+
+            
             server.lastPlayderID++;
             //socket.emit('createTarget',socket.targetPlayer);
             // socket.broadcast.emit('createTarget',socket.targetPlayer);
@@ -206,16 +124,17 @@ io.on('connection',function(socket){
         socket.broadcast.emit('receiveSolution',finishInfo);
     })
 
-    socket.on('testTeams',function(prizes){
+    socket.on('testTeams',function(userList){
         
-        console.log(users);
+        users = userList;
+        // console.log(users);
         // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
-        socket.broadcast.emit('testTeams',{name:"Team 1",players:users}); //Todos menos el emisor! MEGAFONO PLATA
+        socket.broadcast.emit('testTeams',{name:"Team",players:userList}); //Todos menos el emisor! MEGAFONO PLATA
     });
     socket.on('sendTopic',function(questions){
-        
+        console.log(questions);
         // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
-        socket.broadcast.emit('receiveTopic',{topic:"Artes",questList:quesList}); //Todos menos el emisor! MEGAFONO PLATA
+        socket.broadcast.emit('receiveTopic',{topic:questions.topic, questList:questions.quest}); //Todos menos el emisor! MEGAFONO PLATA
     });
 
     socket.on('sendAnswer',function(questions){

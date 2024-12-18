@@ -23,8 +23,22 @@ export class quiz_scene extends Phaser.Scene{
     getQuiz(theme,modal){
         var count=quesList[theme].length;
         var seleccion=quesList[theme][randomIntFromInterval(0,count-1)];
-        console.log(seleccion);
 
+        var questInfo = {
+            theme: theme,
+            questList: {
+                'question':seleccion[0],
+                'trueAnswer':seleccion[4],
+                'answers':[
+                    seleccion[1],
+                    seleccion[2],
+                    seleccion[3]
+                ]
+            }
+        };
+        console.log(questInfo);
+        console.log(seleccion);
+        Client.socket.emit('sendTopic', {topic:questInfo.theme, quest:questInfo.questList} );
         var texto=seleccion[0]+". "+seleccion[1]+"."+seleccion[2]+". ó "+seleccion[3]+", !Responde¡";
         
         utterance.text=texto
@@ -93,9 +107,11 @@ export class quiz_scene extends Phaser.Scene{
                 if (line<4) {
                     scene.printText(line,modal_lines,text,scene);
                 }else{
+                    
                     setTimeout(()=>{
                         console.log("Ahora!");
-                        scene.scene.start("roulette_scene");
+                        Client.socket.emit('sendAnswer');
+                        // scene.scene.start("roulette_scene");
                     },7000)
                     
                 }

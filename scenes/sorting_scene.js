@@ -19,14 +19,19 @@ export class sorting_scene extends Phaser.Scene{
         this.add.image(mid_h, (mid_v/10), 'title_equipos').setOrigin(.5,0).setScale(1.5);
 
         var col=209;
+        
         for (var i = 0; i < 10; i++) {
             boards.push(this.add.image(col, mid_v, 'team_'+(i+1)+'_img').setDepth(1));
             col+=167;
         }
-
+        // console.log(teams);
         var mainScene=this.scene.get('mainScene');
         mainScene.setButton({scene:this, x:mid_h,y:w_height-(mid_mid_v/4),text:"Siguiente",scale_c:scale}).setInteractive().on("pointerdown", () => {
+            console.log(users);
+            console.log('aqui deberia enviar cosas');
+            Client.socket.emit('testTeams',teams);
             this.scene.start("presentation_scene");
+
         });
 
         this.tweens.add({
