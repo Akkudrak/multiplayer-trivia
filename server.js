@@ -142,9 +142,10 @@ io.on('connection',function(socket){
         socket.broadcast.emit('showAnswer',true); //Todos menos el emisor! MEGAFONO PLATA
     });
 
-    socket.on('sendResults',function(questions){
+    socket.on('sendResults',function(result){
+        console.log(result);
         // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
-        socket.broadcast.emit('receiveResults',true); //Todos menos el emisor! MEGAFONO PLATA
+        socket.broadcast.emit('receiveResults',result); //Todos menos el emisor! MEGAFONO PLATA
     });
 
     

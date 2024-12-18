@@ -11,6 +11,7 @@ export class Loading extends Phaser.Scene{
         this.receiveQuestions = false;
         this.saveUser = false;
         this.answerNow = false;
+        this.resultsNow = false;
         this.membersGuild = [];
         this.guildsInfo;
         this.laps = 0;
@@ -115,6 +116,16 @@ export class Loading extends Phaser.Scene{
                 this.showAnswer();
             }
         }
+
+
+        if(resultGamer){
+            if(this.resultsNow === false){
+                this.resultsNow = true;
+                this.showResult();
+
+            }
+        }
+
         //     if(this.anwserNow === false && this.receiveQuestions === false){
         //         this.saveUser = true;
         //         this.selectedUser = JSON.parse(localStorage.getItem('selectedMember'));
@@ -358,7 +369,6 @@ export class Loading extends Phaser.Scene{
             this.selectedUser = this.guildsInfo[rand['val']];
             this.avaliableMembers.splice(numberRand, 1);
             localStorage.setItem('selectedMember',JSON.stringify(this.guildsInfo[rand['val']]));
-            // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
             // console.log(localStorage.getItem('avaliableMembers'));
             this.guild.setAlpha(0);
             this.selector.destroy();
@@ -504,6 +514,7 @@ export class Loading extends Phaser.Scene{
                     color: '#ffffff',
                     stroke: '#2f4649',
                     strokeThickness: 18,
+                    wordWrap: { width: window.innerWidth-50, useAdvancedWrap: true }
                 }).setOrigin(0.5,0.5).setDepth(2).setInteractive();
             // this.optionsQuest[idx]['icon'] = this.add.image(window.innerWidth/2, (window.innerHeight - (middlePos/1.25) +  + ((middlePos/3.5)*idx)),'res').setOrigin(0.5,0.5).setScale(1.5).setInteractive();
             this.optionsQuest[idx].on('pointerdown',(pointer) => {
@@ -524,6 +535,73 @@ export class Loading extends Phaser.Scene{
 
             })
         })
+    }
+    showResult(){
+        this.loadingScreen('show',0,-window.innerHeight/2);
+        this.questionNow.destroy();
+        this.squareQuest.destroy();
+        this.optionsQuest.forEach((el,idx) => {
+            this.optionsQuest[idx].destroy();
+        })
+        localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
+        resultGamer.forEach((el) => {
+            if(el.name == this.selectedUser.name){
+                console.log('tu resultado es: ');
+                console.log(el.status);
+
+                this.ResultTitle = this.add.text(window.innerWidth/2, window.innerHeight/2,
+                el.status.toUpperCase(), {
+                    fontSize: '6rem ',
+                    fontFamily: "MikadoBold",
+                    color: '#ffffff',
+                    stroke: '#2f4649',
+                    strokeThickness: 18,
+                    wordWrap: { width: window.innerWidth-50, useAdvancedWrap: true }
+                }).setOrigin(0.5,0.5).setDepth(5)
+                this.tweens.add({
+                    targets: this.ResultTitle,
+                    y: this.ResultTitle.y-25,
+                    duration: 500,
+                    ease: 'Quad.easeInOut',     
+                    easeParams: [],   
+                    yoyo:true,
+                    repeat:-1,
+                    onComplete: () => {
+
+                    }
+                });
+
+                this.finishEvent = this.add.image(window.innerWidth/2,window.innerHeight-(window.innerHeight/5),'btnGreen').setScale(1.5).setOrigin(0.5,0.5).setInteractive();
+                this.finishEventText = this.add.text(0, 0,
+                'Repetir', {
+                    fontSize: '3rem ',
+                    fontFamily: "MikadoBold",
+                    color: '#FFFFFF',
+                    stroke: '1px'
+                }).setOrigin(0.5,0.5);
+                this.finishEventText.x = this.finishEvent.x - this.finishEventText.displayWidth/8;
+                this.finishEventText.y = this.finishEvent.y - this.finishEventText.displayWidth/8;
+
+
+                this.tryAgain = this.add.image(window.innerWidth/2,window.innerHeight-(window.innerHeight/10),'btnGreen').setScale(1.5).setOrigin(0.5,0.5).setInteractive();
+                this.tryAgainText = this.add.text(0, 0,
+                'Finalizar', {
+                    fontSize: '3rem ',
+                    fontFamily: "MikadoBold",
+                    color: '#FFFFFF',
+                    stroke: '1px'
+                }).setOrigin(0.5,0.5);
+                this.tryAgainText.x = this.tryAgain.x - this.tryAgainText.displayWidth/8;
+                this.tryAgainText.y = this.tryAgain.y - this.tryAgainText.displayWidth/8;
+                
+                this.finishEvent.on('pointerdown',(pointer) => {
+                    
+                });
+
+
+
+            }
+        });
     }
     selectAnswer(option, position,info){
         let centerSpecial = 0;
