@@ -107,7 +107,7 @@ export class quiz_scene extends Phaser.Scene{
                 if (line<4) {
                     scene.printText(line,modal_lines,text,scene);
                 }else{
-                    
+
                     setTimeout(()=>{
                         console.log("Ahora!");
                         Client.socket.emit('sendAnswer');

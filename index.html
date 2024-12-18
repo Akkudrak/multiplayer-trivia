@@ -140,6 +140,7 @@
         endGame();
     });
     var scoreBoardLap = [];
+    var resultsGamers = [];
     Client.socket.on('receiveSolution',function(data){
         console.log("recibiendo respuesta");
         data.time = Date.now();
@@ -154,13 +155,26 @@
                 timing.push(el.time);
             })
             
-            // timing.forEach((el,idx) => {
-            //     // if(scoreBoardLap.idx['valid'] == )
-            // })
-
-            
-
-            // Client.socket.emit('sendResults');
+            timing.forEach((el,idx) => {
+                if(el == scoreBoardLap[idx]['time']){
+                    if(scoreBoardLap[idx]['valid'] == true && resultsGamers.length == 0){
+                        console.log('gano la persona', scoreBoardLap[idx]);
+                        let tempResult = {
+                            name: scoreBoardLap[idx].user.name,
+                            status: 'GANASTE'
+                        };
+                        resultsGamers.push(tempResult);
+                    }else{
+                        console.log('Perdio la persona', scoreBoardLap[idx]);
+                        let tempResult = {
+                            name: scoreBoardLap[idx].user.name,
+                            status: 'PERDISTE'
+                        };
+                        resultsGamers.push(tempResult);
+                    }
+                }
+            })
+            Client.socket.emit('sendResults',resultsGamers);
         }
 
         // endGame();

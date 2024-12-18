@@ -547,12 +547,17 @@
             showAnswer()
         });
 
+
+        var resultGamer;
         Client.socket.on('receiveResults',function(data){
             //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
 
             console.log('recibiendo datos de resultados');
+            // console.log(data);
 
-            // localStorage.setItem('momentAnswer',true);
+
+            // localStorage.setItem('resultGamer',JSON.stringify(data));
+            resultGamer = data;
             // showAnswer()
         });
 
@@ -565,6 +570,7 @@
              receiveTeam();
              
          }
+
 
 
         var guild;
