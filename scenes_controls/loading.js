@@ -1,3 +1,6 @@
+var thisTime=0;
+var globalTimer=0;
+var timerRunning=false;
 export class Loading extends Phaser.Scene{
     constructor () {
         super({ key: 'Loading' });
@@ -33,6 +36,14 @@ export class Loading extends Phaser.Scene{
     }
 
     update(){
+        if (remmainingTime!=remmainingTimeOriginal) {
+            globalTimer.setText(remmainingTime);
+        }else{
+            globalTimer.setText(0);
+        }
+        
+        
+
         if(guild && !localStorage.getItem('selectedMember')){
             if(this.receiveTeam === false){
                 this.receiveTeam = true;
@@ -115,6 +126,8 @@ export class Loading extends Phaser.Scene{
                 this.showAnswer();
             }
         }
+
+
         //     if(this.anwserNow === false && this.receiveQuestions === false){
         //         this.saveUser = true;
         //         this.selectedUser = JSON.parse(localStorage.getItem('selectedMember'));
@@ -138,6 +151,8 @@ export class Loading extends Phaser.Scene{
     }
 
     create(){
+
+
         
         this.background = this.add.image(window.innerWidth/2,window.innerHeight/2,'bgmain').setOrigin(0.5,0.5).setScale(2.9);
         this.loadingMoment = this.add.text(window.innerWidth/2, -window.innerHeight/2, 
@@ -154,6 +169,15 @@ export class Loading extends Phaser.Scene{
             this.guild = this.add.image(window.innerWidth/2,window.innerHeight/2,'whitelist').setOrigin(0.5,0.5).setScale(1.8);
             this.guild.setAlpha(0);
 
+            this.guild = this.add.image(window.innerWidth/2,window.innerHeight/2,'whitelist').setOrigin(0.5,0.5).setScale(1.8);
+            globalTimer=this.add.text(window.innerWidth/2,window.innerHeight, 
+            "00:0"+thisTime, { 
+                fontSize: 100,
+                fontFamily: "MikadoBold",
+                color: '#ffffff',
+                stroke: '#2f4649',
+                strokeThickness: 12,
+            }).setOrigin(.5,1);
     }
     loadingScreen(mode,specialY,customY) {
         var posY;
@@ -518,6 +542,7 @@ export class Loading extends Phaser.Scene{
                     repeat:1,
                     onComplete: () => {
                         console.log('Elegiste a bulbasur');
+                        forceEndTimer=true;
                         this.selectAnswer(el,idx,infoQuest);
                     }
                 });

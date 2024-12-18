@@ -112,7 +112,7 @@ export class quiz_scene extends Phaser.Scene{
                         console.log("Ahora!");
                         Client.socket.emit('sendAnswer');
                         // scene.scene.start("roulette_scene");
-                    },7000)
+                    },500)
                     
                 }
                 

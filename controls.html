@@ -558,12 +558,13 @@
 
         
 
-        localStorage.clear();
-        // if(!localStorage.getItem('idTeam')){
-        //     Client.socket.emit('joinPlayer');
-        // }else{
-        //     receiveTeam();
-        // }
+        //localStorage.clear();
+         if(!localStorage.getItem('idTeam')){
+             Client.socket.emit('joinPlayer');
+         }else{
+             receiveTeam();
+             
+         }
 
 
         var guild;
@@ -598,6 +599,30 @@
     var receiveAnswer;
     function showAnswer(){
         receiveAnswer = true;
+        timerRunning=true;
+        answerTimer();
+    }
+
+
+    var remmainingTimeOriginal=7;
+    var remmainingTime=remmainingTimeOriginal;
+    var forceEndTimer=false;
+    function answerTimer(){
+        //document.getElementById("gameTimer").innerHTML="00:0"+remmainingTime;
+        if (remmainingTime<=0||forceEndTimer) {
+            console.log("terminamos");
+            remmainingTime=remmainingTimeOriginal;
+            timerRunning=false;
+            forceEndTimer=false;
+            game.scene.scenes[0].selectAnswer(false,0,0)
+        }else{
+            console.log(remmainingTime);
+            remmainingTime--;
+            thisTime=remmainingTime;
+            setTimeout(()=>{
+                answerTimer();
+            },1000)
+        }
     }
 
     </script>
