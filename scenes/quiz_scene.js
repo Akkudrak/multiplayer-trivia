@@ -31,7 +31,8 @@ export class quiz_scene extends Phaser.Scene{
         this.add.image(0, 0, 'bg_main').setDisplaySize(w_width,w_height).setOrigin(0,0);
         this.add.image(w_width-(padding*6), (mid_v+mid_mid_v*1.7), 'pet_1_lg').setOrigin(1,1).flipX=true;
 
-        var modal_quiz=this.add.image(padding, mid_v, 'bg_modal').setOrigin(0,.5).setScale(1.2);
+        var modal_quiz=this.add.image(padding, mid_v+(mid_v/5), 'bg_modal').setOrigin(0,.5).setScale(1.2);
+        this.add.image(mid_h, mid_mid_v/4, "l_"+this.theme).setOrigin(.5,0).setScale(scale); 
         //modal_quiz.quiz=
         this.getQuiz(this.theme,modal_quiz);
     } 

@@ -18,8 +18,9 @@ export class roulette_scene extends Phaser.Scene{
     create (){   
         this.add.image(0, 0, 'bg_main').setDisplaySize(w_width,w_height).setOrigin(0,0);
         this.add.image(padding, (mid_v+mid_mid_v), 'pet_1_lg').setOrigin(0,1);
-        wheel=this.add.image(mid_h, mid_v, 'wheel').setOrigin(.5,.5).setScale(.8);
+        wheel=this.add.image(mid_h, mid_v+(mid_v/3), 'wheel').setOrigin(.5,.5).setScale(.8);
         this.add.image(mid_h, wheel.getBounds().top-40, 'needle').setOrigin(.5,0).setScale(.8);
+        this.add.image(mid_h, mid_mid_v/4, 'seleccion_tema').setOrigin(.5,0).setScale(scale); 
 
         imageCategory=this.add.image((wheel.getBounds().right+padding)+((1920-(wheel.getBounds().right+padding))/2), mid_v, 'ciencia').setOrigin(.5,.5).setScale(1.4);
         this.add.image(imageCategory.x, imageCategory.getBounds().bottom+padding, 'seleccionando').setOrigin(.5,0).setScale(.8);

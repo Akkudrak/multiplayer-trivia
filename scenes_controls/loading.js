@@ -562,9 +562,6 @@ export class Loading extends Phaser.Scene{
                     repeat:1,
                     onComplete: () => {
                         console.log('Elegiste a bulbasur');
-                        // if(idx == this.optionsQuest.length-1){
-                            
-                        // }
                         this.selectAnswer(el,idx,infoQuest);
                     }
                 });
@@ -722,6 +719,7 @@ export class Loading extends Phaser.Scene{
         });
     }
     selectAnswer(option, position,info){
+
         let centerSpecial = 0;
         this.guildsInfo = new Array;
 
