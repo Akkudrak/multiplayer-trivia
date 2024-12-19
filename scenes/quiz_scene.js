@@ -7,8 +7,20 @@ export class quiz_scene extends Phaser.Scene{
      init(data) {
         
         this.theme = data.theme || 'Desconocido';
+
+        this.stopSearchResult = false;
     }
 
+    update(){
+
+        if(resultsGamers.length > 0){
+            if(this.stopSearchResult === false){
+                this.stopSearchResult = true;
+                this.scene.start("results_scene");
+            }
+        }
+
+    }
 
     create (){   
         this.add.image(0, 0, 'bg_main').setDisplaySize(w_width,w_height).setOrigin(0,0);
@@ -111,7 +123,6 @@ export class quiz_scene extends Phaser.Scene{
                     setTimeout(()=>{
                         console.log("Ahora!");
                         Client.socket.emit('sendAnswer');
-                        // scene.scene.start("roulette_scene");
                     },500)
                     
                 }

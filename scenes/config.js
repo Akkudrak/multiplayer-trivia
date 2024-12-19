@@ -6,7 +6,7 @@ import {presentation_scene} from "/scenes/presentation_scene.js";
 import {waiting_ready_scene} from "/scenes/waiting_ready_scene.js";
 import {roulette_scene} from "/scenes/roulette_scene.js";
 import {quiz_scene} from "/scenes/quiz_scene.js";
-
+import {results_scene} from "/scenes/results_scene.js";
 
 
 
@@ -16,7 +16,7 @@ const config = {
     height: w_height,
     backgroundColor: '#000000',
     parent: 'trivia_multiplayer',
-    scene: [mainScene,waiting_scene,sorting_scene,presentation_scene,waiting_ready_scene,roulette_scene,quiz_scene],
+    scene: [mainScene,waiting_scene,sorting_scene,presentation_scene,waiting_ready_scene,roulette_scene,quiz_scene,results_scene],
     
     physics: {
         default: 'arcade',
