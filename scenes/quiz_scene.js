@@ -4,12 +4,17 @@ export class quiz_scene extends Phaser.Scene{
         super({ key: 'quiz_scene' });
     }
 
+
+
      init(data) {
         
         this.theme = data.theme || 'Desconocido';
 
         this.stopSearchResult = false;
     }
+
+
+    
 
     update(){
 
@@ -88,6 +93,7 @@ export class quiz_scene extends Phaser.Scene{
         var liner=0;
         var lineText="";
         var juanword=""; 
+        console.warn('llegamso');
         var intervalId = setInterval(function() {
             lineText+= words[index];
             if (words[index]==" ") {
@@ -115,13 +121,13 @@ export class quiz_scene extends Phaser.Scene{
                 clearInterval(intervalId);
                 forceEndQuiz=false;
                 line++;
-                console.log(line);
+                // alert(line);
                 if (line<4) {
                     scene.printText(line,modal_lines,text,scene);
                 }else{
 
                     setTimeout(()=>{
-                        console.log("Ahora!");
+                        console.warn("Ahora!");
                         Client.socket.emit('sendAnswer');
                     },500)
                     

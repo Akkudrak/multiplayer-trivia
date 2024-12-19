@@ -628,7 +628,7 @@ export class Loading extends Phaser.Scene{
                             strokeThickness: 18,
                             align:"center"
                         }).setOrigin(0.5,0.5);
-
+                        localStorage.clear();
                 });
 
                 this.tryAgain.on('pointerdown',(pointer) => {

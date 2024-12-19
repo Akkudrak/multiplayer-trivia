@@ -6,6 +6,12 @@ export class waiting_ready_scene extends Phaser.Scene{
         super({ key: 'waiting_ready_scene' });
     }
 
+    preload(){
+        this.events.on('shutdown',() => {
+            console.log(this.data);
+        })
+    }
+
     update(){
         if(usersActive){
 
@@ -24,14 +30,16 @@ export class waiting_ready_scene extends Phaser.Scene{
     }
 
     create (){   
+        
         this.add.image(0, 0, 'bg_main').setDisplaySize(w_width,w_height).setOrigin(0,0);
         //this.add.image(mid_h, (mid_v/10), 'title_presentacion').setOrigin(.5,0).setScale(1.5);
         this.add.image(padding, (mid_v+mid_mid_v), 'pet_1_lg').setOrigin(0,1); 
         // this.drawParticipants(teams[0]);
         this.drawParticipants(receiveMembers);
-
+        console.log(this.data);
         var mainScene=this.scene.get('mainScene');
         mainScene.setButton({scene:this, x:mid_h,y:w_height-(mid_mid_v/4),text:"Siguiente",scale_c:scale}).setInteractive().on("pointerdown", () => {
+            console.warn('pop');
             game.scene.start("roulette_scene");
         });
 

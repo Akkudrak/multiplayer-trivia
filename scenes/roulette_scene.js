@@ -10,7 +10,10 @@ export class roulette_scene extends Phaser.Scene{
         super({ key: 'roulette_scene' });
     }
 
+    init(...props){
+        console.log(props);
 
+    }
 
     create (){   
         this.add.image(0, 0, 'bg_main').setDisplaySize(w_width,w_height).setOrigin(0,0);
