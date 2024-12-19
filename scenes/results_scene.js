@@ -7,11 +7,7 @@ export class results_scene extends Phaser.Scene{
     }
 
     preload(){
-        // alert('popcorn');
-        
-        
-        
-
+        stopUpdate = false;
     }
 
     

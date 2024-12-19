@@ -1,8 +1,8 @@
-var localVar = [];
+
 var thisTime=0;
 var globalTimer=0;
 var timerRunning=false;
-
+var localVar = [];
 export class Loading extends Phaser.Scene{
     constructor () {
         super({ key: 'Loading' });
@@ -283,14 +283,15 @@ export class Loading extends Phaser.Scene{
                     callbackScope: this,
                     loop: 10 // Para que se repita indefinidamente
                   });
-            },5000);
+            },0);
         }else{
-            
+            this.guild.setAlpha(0);
             Client.socket.emit('selectedChara', this.guildsInfo[this.avaliableMembers[0]['val']]);
             this.guildsInfo[this.avaliableMembers[0]['val']].used = true;
             this.selectedUser = this.guildsInfo[this.avaliableMembers[0]['val']];
+            this.saveUser = true;
             // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
-            // this.showSelectedCharacter();
+            this.showSelectedCharacter();
         }
         
 
@@ -561,12 +562,14 @@ export class Loading extends Phaser.Scene{
                     repeat:1,
                     onComplete: () => {
                         console.log('Elegiste a bulbasur');
-                        forceEndTimer=true;
+                        // if(idx == this.optionsQuest.length-1){
+                            
+                        // }
                         this.selectAnswer(el,idx,infoQuest);
                     }
                 });
-
             })
+            
         })
     }
     showResult(){
@@ -576,6 +579,7 @@ export class Loading extends Phaser.Scene{
         this.optionsQuest.forEach((el,idx) => {
             this.optionsQuest[idx].destroy();
         })
+        
         this.loadingScreen('show','',-window.innerHeight/2);
         
         resultGamer.forEach((el) => {
@@ -658,6 +662,7 @@ export class Loading extends Phaser.Scene{
                     this.loadingScreen('show','',-window.innerHeight/2);
                     localStorage.removeItem('topic');
                     localStorage.removeItem('questList');
+                    localStorage.removeItem('momentAnswer');
                     this.ResultTitle.destroy();
                     this.playerSelectedTitle.destroy();
                     this.playerSelectedAutor.destroy();
@@ -672,6 +677,8 @@ export class Loading extends Phaser.Scene{
                     this.receiveQuestions = false;
                     this.saveUser = false;
                     this.resultsNow = false;
+                    forceEndTimer = false;
+                    resultSend = false;
                     localStorage.removeItem('selectedMember');
                     
                     if(localStorage.getItem('avaliableMembers')){
@@ -724,6 +731,8 @@ export class Loading extends Phaser.Scene{
         if(info.length == 0){
             info = JSON.parse(JSON.stringify(localStorage.getItem('questList')));
         }
+        forceEndTimer=true;
+        resultSend=true;
         console.log();
         let posIni = (this.squareQuest.y+this.squareQuest.displayHeight/2);
         let middlePos = window.innerHeight - posIni;

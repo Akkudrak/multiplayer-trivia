@@ -14,7 +14,7 @@ export class presentation_scene extends Phaser.Scene{
         textModal=this.add.image(mid_h, (w_height-padding), 'bg_modal').setOrigin(.5,1).setDisplaySize((w_width-(padding*2)), mid_mid_v-50);
         textModal.alpha = 0.6;
         console.log(textModal);
-        var texto="Hola, bienvenido al juego de trivia de Coin City, te explico rapidamente las reglas:. Primero, serán llamados uno por uno al centro. Segundo, Mirarán la pantalla para saber el tema y la pregunta. Tercero: yo les diré cuando pueden contestar usando el dispositivo en la mesa.";
+        var texto="Bienvenido, te explico las reglas:. Primero, serán llamados uno por uno. Segundo, Mirarán la pantalla para saber el tema y la pregunta. Tercero: yo les diré cuando pueden contestar usando el dispositivo en la mesa.";
         
         utterance.text=texto
         synthesis.speak(utterance);
@@ -23,6 +23,7 @@ export class presentation_scene extends Phaser.Scene{
         var mainScene=this.scene.get('mainScene');
         mainScene.setButton({scene:this, x:mid_h,y:w_height-(mid_mid_v/4),text:"Siguiente",scale_c:scale}).setInteractive().on("pointerdown", () => {
             forceEnd=true;
+            synthesis.cancel();
         });
 
 

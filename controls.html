@@ -554,10 +554,12 @@
 
             console.log('recibiendo datos de resultados');
             console.log("datos recibidos",data);
-
+            receiveAnswer = null;
 
             // localStorage.setItem('resultGamer',JSON.stringify(data));
-            resultGamer = data;
+            
+            resultGamer = JSON.parse(data);
+
             // showAnswer()
         });
 
@@ -613,14 +615,17 @@
     var remmainingTimeOriginal=7;
     var remmainingTime=remmainingTimeOriginal;
     var forceEndTimer=false;
+    var resultSend = false;
     function answerTimer(){
         //document.getElementById("gameTimer").innerHTML="00:0"+remmainingTime;
         if (remmainingTime<=0||forceEndTimer) {
             console.log("terminamos");
             remmainingTime=remmainingTimeOriginal;
             timerRunning=false;
-            forceEndTimer=false;
-            game.scene.scenes[0].selectAnswer("",0,false)
+            receiveAnswer = false;
+            if(resultSend === false){
+                game.scene.scenes[0].selectAnswer("",0,false)
+            }
         }else{
             console.log(remmainingTime);
             remmainingTime--;

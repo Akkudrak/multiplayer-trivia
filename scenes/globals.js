@@ -14,7 +14,6 @@
         var usersActive = [];
         var scoreBoardLap = [];
         var resultsGamers = [];
-
         var start=false;
         var stay=false;
         var stillMoving=false;

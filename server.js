@@ -2,12 +2,18 @@ var fs = require("node:fs");
 const options = {
   key: fs.readFileSync("key.pem"),
   cert: fs.readFileSync("cert.pem"),
+  cors: {
+    origin: "*",
+  }
 };
 
 var express = require('express');
 var app = express();
 var server = require('https').Server(options,app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, { cors: {
+    origin: "*",
+  } 
+});
 // console.log('asd');
 var players=[];
 var maxPlayers=8;
@@ -48,7 +54,7 @@ server.listen(process.env.PORT || 8000,"0.0.0.0",function(){
 
 
 io.on('connection',function(socket){
-
+    console.log(socket.id);
     socket.on('joinPlayer',function(){
         if (server.lastPlayderID<11) {
             console.log("createTarget");
@@ -95,7 +101,7 @@ io.on('connection',function(socket){
 
     socket.on('dispense',function(){
         console.log("dispense");
-        io.emit('dispense');
+        io.emit('dispense',{  });
     });
 
     socket.on('endGame',function(prizes){
