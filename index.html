@@ -22,6 +22,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+    <!-- <script type="text/javascript" src="/lib/phaser.js"></script> -->
     <script type="text/javascript" src="/scenes/globals.js"></script>
     <script type="text/javascript" src="/scenes/quiz.js"></script>
     <script type="text/javascript" src="/scenes/aux_functions.js"></script>
@@ -139,8 +140,7 @@
         console.log("endgame");
         endGame();
     });
-    var scoreBoardLap = [];
-    var resultsGamers = [];
+
     Client.socket.on('receiveSolution',function(data){
         console.log("recibiendo respuesta");
         data.time = Date.now();
@@ -150,14 +150,15 @@
     
         if(scoreBoardLap.length == usersActive.length){
             let timing = [];
+            var winner = false;
 
             scoreBoardLap.forEach((el) => {
                 timing.push(el.time);
             })
-            
             timing.forEach((el,idx) => {
                 if(el == scoreBoardLap[idx]['time']){
-                    if(scoreBoardLap[idx]['valid'] == true && resultsGamers.length == 0){
+                    if(scoreBoardLap[idx]['valid'] == true && winner === false){
+                        winner = true;
                         console.log('gano la persona', scoreBoardLap[idx]);
                         let tempResult = {
                             name: scoreBoardLap[idx].user.name,
@@ -176,17 +177,20 @@
             })
             console.log(resultsGamers);
             Client.socket.emit('sendResults',resultsGamers);
+            usersActive=[];
+            
+            console.log(usersActive);
         }
 
         // endGame();
     });
 
     var characterList = [];
-    Client.socket.on('selectedCharacter',function(data){
+    Client.socket.on('selectedCharacter',function(mono){
 
-        receiveMembers.push(data);
+        receiveMembers.push(mono);
         // characterList.push(data);
-        console.log(data);
+        console.log(mono, 'llegando para quedarse');
         //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
         // console.log("testTeams",data);
         // receiveTeam(data)

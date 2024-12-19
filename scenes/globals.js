@@ -12,6 +12,8 @@
 
         var receiveMembers = [];
         var usersActive = [];
+        var scoreBoardLap = [];
+        var resultsGamers = [];
 
         var start=false;
         var stay=false;
@@ -131,7 +133,7 @@
             var team=0;
             var index=0;
             users=shuffle(users);
-            console.log(users);
+
             for (var i = 0; i < equipos; i++) {
                 teams.push([]);
 
@@ -192,18 +194,19 @@
         
 
         function shuffle(array) {
-          let currentIndex = array.length;
 
-          // While there remain elements to shuffle...
-          while (currentIndex != 0) {
-
-            // Pick a remaining element...
-            let randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            // And swap it with the current element.
-            [array[currentIndex], array[randomIndex]] = [
-              array[randomIndex], array[currentIndex]];
+            let currentIndex = array.length;
+  
+            // While there remain elements to shuffle...
+            while (currentIndex != 0) {
+  
+              // Pick a remaining element...
+              let randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex--;
+  
+              // And swap it with the current element.
+              [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+            }
+            return array;
           }
-          return array;
-        } 

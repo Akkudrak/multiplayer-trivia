@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 var thisTime=0;
 var globalTimer=0;
 var timerRunning=false;
+=======
+var localVar = [];
+>>>>>>> mobileScreen
 export class Loading extends Phaser.Scene{
     constructor () {
         super({ key: 'Loading' });
@@ -22,7 +26,6 @@ export class Loading extends Phaser.Scene{
         this.randomizerInterval;
         this.avaliableMembers = [];
         this.selectedUser = [];
-
     }
 
     preload(){
@@ -49,10 +52,12 @@ export class Loading extends Phaser.Scene{
             if(this.receiveTeam === false){
                 this.receiveTeam = true;
                 this.guildsInfo = new Array;
-                var localVar = [];
+                this.laps = 0;
+                this.observer = 0;
+                
                 if(localStorage.getItem('avaliableMembers')){
                     this.avaliableMembers = JSON.parse(localStorage.getItem('avaliableMembers'));
-                    // console.log('sacados del local', this.avaliableMembers)
+                    console.log('sacados del local', this.avaliableMembers)
                     
                     // console.log(this.avaliableMembers);
                     // console.log(this.selectedUser);
@@ -93,7 +98,7 @@ export class Loading extends Phaser.Scene{
 
         if(localStorage.getItem('selectedMember') && !localStorage.getItem('topic')){
             if(this.saveUser === false){
-                // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
+                
                 this.saveUser = true;
                 this.selectedUser = JSON.parse(localStorage.getItem('selectedMember'));
                 setTimeout(() => {
@@ -109,6 +114,7 @@ export class Loading extends Phaser.Scene{
                 this.saveUser = true;
                 this.receiveQuestions = true;
                 this.selectedUser = JSON.parse(localStorage.getItem('selectedMember'));
+
                 setTimeout(() => {
                     this.loadingScreen('cerrar');
                     this.showSelectedCharacter();
@@ -116,6 +122,8 @@ export class Loading extends Phaser.Scene{
             }else if(this.receiveQuestions === false){
                 this.receiveQuestions = true;
                 this.selectedUser = JSON.parse(localStorage.getItem('selectedMember'));
+                
+                // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
                 this.showTopic();
             }
         }
@@ -238,7 +246,7 @@ export class Loading extends Phaser.Scene{
 
     }
     showGuild() {
-        // console.log('aqui deberia activar el guild');
+        
         this.guild.setAlpha(1);
         if(this.avaliableMembers.length > 1){
             var temp = this.add.rectangle(window.innerWidth/2,this.guild.y+this.guild.displayWidth/7, this.guild.displayWidth-this.guild.displayWidth/4,this.guild.displayHeight-this.guild.displayHeight/3.3,0x000000,0).setOrigin(0.5,0.5);
@@ -279,10 +287,11 @@ export class Loading extends Phaser.Scene{
                   });
             },5000);
         }else{
+            
             Client.socket.emit('selectedChara', this.guildsInfo[this.avaliableMembers[0]['val']]);
             this.guildsInfo[this.avaliableMembers[0]['val']].used = true;
             this.selectedUser = this.guildsInfo[this.avaliableMembers[0]['val']];
-            localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
+            // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
             // this.showSelectedCharacter();
         }
         
@@ -427,7 +436,11 @@ export class Loading extends Phaser.Scene{
         
     }
     showTopic(){
-
+        if(this.avaliableMembers == ''){
+            this.avaliableMembers = JSON.parse(localStorage.getItem('avaliableMembers'));
+        }else{
+            localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
+        }
         this.catTitle = this.add.text(this.guild.x, this.guild.y-(this.DNI.displayWidth/3),
             'CATEGORIA\n'+localStorage.getItem('topic'), {
                 fontSize: '4rem ',
@@ -559,20 +572,20 @@ export class Loading extends Phaser.Scene{
         })
     }
     showResult(){
-        this.loadingScreen('show',0,-window.innerHeight/2);
+        
         this.questionNow.destroy();
         this.squareQuest.destroy();
         this.optionsQuest.forEach((el,idx) => {
             this.optionsQuest[idx].destroy();
         })
-        localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
-        resultGamer=JSON.parse(resultGamer);
-        console.log(resultGamer);
+
+        this.loadingScreen('show','',-window.innerHeight/2);
+        
         resultGamer.forEach((el) => {
             if(el.name == this.selectedUser.name){
-                console.log('tu resultado es: ');
-                console.log(el.status);
-
+                // console.log('tu resultado es: ');
+                // console.log(el.status);
+                // this.avaliableMembers.splice(this.selectedUser['id'], 1);
                 this.ResultTitle = this.add.text(window.innerWidth/2, window.innerHeight/2,
                 el.status.toUpperCase(), {
                     fontSize: '6rem ',
@@ -580,6 +593,7 @@ export class Loading extends Phaser.Scene{
                     color: '#ffffff',
                     stroke: '#2f4649',
                     strokeThickness: 18,
+                    align:"center",
                     wordWrap: { width: window.innerWidth-50, useAdvancedWrap: true }
                 }).setOrigin(0.5,0.5).setDepth(5)
                 this.tweens.add({
@@ -597,7 +611,7 @@ export class Loading extends Phaser.Scene{
 
                 this.finishEvent = this.add.image(window.innerWidth/2,window.innerHeight-(window.innerHeight/5),'btnGreen').setScale(1.5).setOrigin(0.5,0.5).setInteractive();
                 this.finishEventText = this.add.text(0, 0,
-                'Repetir', {
+                'Finalizar', {
                     fontSize: '3rem ',
                     fontFamily: "MikadoBold",
                     color: '#FFFFFF',
@@ -606,10 +620,10 @@ export class Loading extends Phaser.Scene{
                 this.finishEventText.x = this.finishEvent.x - this.finishEventText.displayWidth/8;
                 this.finishEventText.y = this.finishEvent.y - this.finishEventText.displayWidth/8;
 
-
+                this.loadingScreen('show',0,-window.innerHeight/2);
                 this.tryAgain = this.add.image(window.innerWidth/2,window.innerHeight-(window.innerHeight/10),'btnGreen').setScale(1.5).setOrigin(0.5,0.5).setInteractive();
                 this.tryAgainText = this.add.text(0, 0,
-                'Finalizar', {
+                'Repetir', {
                     fontSize: '3rem ',
                     fontFamily: "MikadoBold",
                     color: '#FFFFFF',
@@ -619,7 +633,83 @@ export class Loading extends Phaser.Scene{
                 this.tryAgainText.y = this.tryAgain.y - this.tryAgainText.displayWidth/8;
                 
                 this.finishEvent.on('pointerdown',(pointer) => {
+                    this.loadingScreen('show','',-window.innerHeight/2);
+                    this.tryAgain.destroy();
+                    this.tryAgainText.destroy();
+                    this.finishEvent.destroy();
+                    this.finishEventText.destroy();
+                    this.playerSelectedAutor.destroy();
 
+                    this.ResultTitle.destroy();
+                    this.ResultTitle.destroy();
+                    this.playerSelectedTitle.destroy();
+                    this.DNI.destroy();
+                    this.thankyou = this.add.text(window.innerWidth/2, window.innerHeight/2,
+                        'GRACIAS\nPOR JUGAR', {
+                            fontSize: '3rem ',
+                            fontFamily: "MikadoBold",
+                            color: '#FFFFFF',
+                            stroke: '1px',
+                            stroke: '#2f4649',
+                            strokeThickness: 18,
+                            align:"center"
+                        }).setOrigin(0.5,0.5);
+                        localStorage.clear();
+                });
+
+                this.tryAgain.on('pointerdown',(pointer) => {
+                    this.loadingScreen('show','',-window.innerHeight/2);
+                    localStorage.removeItem('topic');
+                    localStorage.removeItem('questList');
+                    this.ResultTitle.destroy();
+                    this.playerSelectedTitle.destroy();
+                    this.playerSelectedAutor.destroy();
+                    this.tryAgain.destroy();
+                    this.tryAgainText.destroy();
+                    this.finishEventText.destroy();
+                    this.finishEvent.destroy();
+                    this.DNI.destroy();
+                    receiveAnswer  = null;
+                    resultGamer  = null; 
+                    this.answerNow = false;
+                    this.receiveQuestions = false;
+                    this.saveUser = false;
+                    this.resultsNow = false;
+                    localStorage.removeItem('selectedMember');
+                    
+                    if(localStorage.getItem('avaliableMembers')){
+                        
+                        this.avaliableMembers = JSON.parse(localStorage.getItem('avaliableMembers'));
+                        this.avaliableMembers.forEach((pos,stp) => {
+                            localVar[stp] = pos['val'];
+                        });
+                        JSON.parse(localStorage.getItem('dataInfo')).forEach((el,idx) => {
+                            this.guildsInfo[idx] = { name: el, id:idx,used: false, score:0, ready:false };
+                            if(!localVar.includes(idx)){
+                                this.guildsInfo[idx]['used'] = true;
+                            }
+                        });
+                        if(this.membersGuild == ''){
+                            var temp = this.add.rectangle(window.innerWidth/2,this.guild.y+this.guild.displayWidth/7, this.guild.displayWidth-this.guild.displayWidth/4,this.guild.displayHeight-this.guild.displayHeight/3.3,0x000000,0).setOrigin(0.5,0.5);
+                            this.guildsInfo.forEach((el,idx) => {
+                                this.membersGuild[idx] = this.add.text(this.guild.x, (temp.y - temp.displayHeight/2) + (this.numberTeam.displayHeight*1.5),
+                                        el.name, {
+                                        fontSize: '3rem ',
+                                        fontFamily: "MikadoBold",
+                                        color: '#7d282a',
+                                        stroke: '1px'
+                                    }).setOrigin(0.5,0.5);
+                                if(idx > 0){
+                                    this.membersGuild[idx].y = this.membersGuild[(idx-1)].y+this.numberTeam.displayHeight*1.5;
+                                }
+                                if(el.used==true){
+                                    this.membersGuild[idx].setAlpha(0.5);
+                                }
+                            })
+                            temp.destroy();
+                        }
+                    }
+                    this.showGuild();
                 });
 
 
@@ -631,47 +721,29 @@ export class Loading extends Phaser.Scene{
         let centerSpecial = 0;
         this.guildsInfo = new Array;
 
-
-        console.log("option",option);
-        console.log("position",position);
-        console.log("info",info);
-        console.log(localStorage.getItem('questList'));
+        // console.log("option",option);
+        // console.log("position",position);
+        // console.log("info",info);
+        if(info.length == 0){
+            info = JSON.parse(JSON.stringify(localStorage.getItem('questList')));
+        }
+        console.log();
         let posIni = (this.squareQuest.y+this.squareQuest.displayHeight/2);
         let middlePos = window.innerHeight - posIni;
         centerSpecial = window.innerHeight - middlePos/2;
-        var localVar = [];
+        
         this.optionsQuest.forEach((el,idx) => {
             this.optionsQuest[idx].destroy();
             // this.optionsQuest[idx]['icon'].destroy();
         })
         this.loadingScreen('show',0,centerSpecial);
         
-        if(localStorage.getItem('avaliableMembers')){
-            // console.log(localStorage.getItem('avaliableMembers'));
-            this.avaliableMembers = JSON.parse(localStorage.getItem('avaliableMembers'));
-            
-            // this.avaliableMembers.forEach((pos,stp) => {
-            //     localVar[stp] = pos['val'];
-            // });
-            // JSON.parse(localStorage.getItem('dataInfo')).forEach((el,idx) => {
-            //     this.guildsInfo[idx] = { name: el, id:idx,used: false, score:0, ready:false };
-            //     if(!localVar.includes(idx)){
-            //         this.guildsInfo[idx]['used'] = true;
-            //     }
-            // });
-            // guild.forEach((el,idx) => {
-            //     this.guildsInfo[idx] = { name: el, id:idx,used: false, score:0, ready:false };
-            //     if(!localVar.includes(idx)){
-            //         this.guildsInfo[idx]['used'] = true;
-            //     }
-            // })
-            
-        }
         
-        if(option == ''){
+        
+        // if(info['trueAnswer']){
             if(position == info['trueAnswer']){
                 var nameSelected = this.selectedUser['name'];
-                this.avaliableMembers.splice(this.selectedUser['id'], 1);
+                
                 // localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
                 // if(localStorage.getItem('winners')){
                 //     let winna = JSON.parse(localStorage.getItem('winners'));
@@ -696,13 +768,13 @@ export class Loading extends Phaser.Scene{
                     valid: false,
                 });
             }
-        }else{
-            Client.socket.emit('sendSolution',{
-                user: JSON.parse(localStorage.getItem('selectedMember')),
-                answer: option,
-                valid: false,
-            });
-        }
+        // }else{
+        //     Client.socket.emit('sendSolution',{
+        //         user: JSON.parse(localStorage.getItem('selectedMember')),
+        //         answer: option,
+        //         valid: false,
+        //     });
+        // }
     }
 }
 
