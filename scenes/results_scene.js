@@ -62,6 +62,8 @@ export class results_scene extends Phaser.Scene{
             this.cont.item_1=this.add.text(this.cont.x, this.cont.y+10, participants[i].name, { fontFamily: 'mikado', fontSize: 25, color:'#000000' }).setOrigin(.5, .5);
             this.cont.item_2=this.add.text(this.cont.x, this.cont.getBounds().top+padding*2, "Esperando...", { fontFamily: 'mikado', fontSize: 25, color:'#ffffff' }).setOrigin(.5, .5);
             this.cont.item_3=this.add.image(this.cont.getBounds().right, this.cont.getBounds().bottom, 'icon_wait').setOrigin(1,1).setScale(.7);
+            this.cont.item_4=this.add.image(this.cont.getBounds().left+padding*2, this.cont.getBounds().bottom-padding*2, 'place').setOrigin(.5,.5).setScale(.7);
+            this.cont.item_5=this.add.text(this.cont.getBounds().left+padding*2, this.cont.getBounds().bottom-padding*2, (i+1), { fontFamily: 'mikado', fontSize: 35, color:'#ffffff' }).setOrigin(.5, .5);
             this.cont.datax=participants[i];
             this.cont.ready=false;
             waitingText.push(this.cont);
@@ -78,6 +80,8 @@ export class results_scene extends Phaser.Scene{
         }
     }
     changeStatus(item){
+        console.log(item);
+
         for (var i = 0; i < waitingText.length; i++) {
             if (waitingText[i].datax.name==item.name) {
                 console.log(waitingText[i]);
@@ -88,6 +92,8 @@ export class results_scene extends Phaser.Scene{
                 }else{
                     waitingText[i].item_3.setTexture("icon_no");
                 }
+
+
                 break;
             }
         }

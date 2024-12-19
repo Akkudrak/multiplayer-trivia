@@ -10,7 +10,12 @@ export class presentation_scene extends Phaser.Scene{
     create (){   
         this.add.image(0, 0, 'bg_main').setDisplaySize(w_width,w_height).setOrigin(0,0);
         this.add.image(mid_h, (mid_v/10), 'title_presentacion').setOrigin(.5,0).setScale(1.5);
-        this.add.image(mid_h, (mid_v+mid_mid_v), 'pet_1_lg').setOrigin(.5,1);
+
+        this.anims.create({ key : "mapache_anim",frames: this.anims.generateFrameNames("mapache",{start: 0,end:11}),repeat:-1});
+
+        var peto=this.physics.add.sprite(mid_h, (w_height-mid_v/3), 'mapache_anim').setOrigin(.5,1);
+        peto.anims.play("mapache_anim",true)
+
         textModal=this.add.image(mid_h, (w_height-padding), 'bg_modal').setOrigin(.5,1).setDisplaySize((w_width-(padding*2)), mid_mid_v-50);
         textModal.alpha = 0.6;
         console.log(textModal);
@@ -21,7 +26,7 @@ export class presentation_scene extends Phaser.Scene{
         this.textolines(textModal,texto,this);
 
         var mainScene=this.scene.get('mainScene');
-        mainScene.setButton({scene:this, x:mid_h,y:w_height-(mid_mid_v/4),text:"Siguiente",scale_c:scale}).setInteractive().on("pointerdown", () => {
+        mainScene.setButton({scene:this, x:peto.x,y:peto.y-(peto.height/6),text:"Siguiente",scale_c:scale}).setInteractive().on("pointerdown", () => {
             forceEnd=true;
             synthesis.cancel();
         });

@@ -74,7 +74,7 @@ export class mainScene extends Phaser.Scene{
         this.load.image('ciencia', 'images/gui/ciencia.png');
         this.load.image('geografia', 'images/gui/geografia.png');
         this.load.image('matematicas', 'images/gui/matematicas.png');
-        this.load.image('historia', 'images/gui/historia.png');
+        this.load.image('general', 'images/gui/general.png');
         this.load.image('cine', 'images/gui/cine.png');
         this.load.image('musica', 'images/gui/musica.png');
         this.load.image('arte', 'images/gui/arte.png');
@@ -87,6 +87,21 @@ export class mainScene extends Phaser.Scene{
         this.load.image('bg_modal', 'images/gui/bg_modal.png');
         this.load.image('btn_lg_green', 'images/gui/btn_lg_green.png');
         this.load.image('btn_lg_white', 'images/gui/btn_lg_white.png');
+
+        this.load.image('place', 'images/gui/place.png');
+        this.load.image('resultados', 'images/gui/resultados.png');
+        this.load.image('esperando', 'images/gui/esperando.png');
+        this.load.image('seleccion_tema', 'images/gui/seleccion_tema.png');
+        this.load.image('l_arte', 'images/gui/l_arte.png');
+        this.load.image('l_ciencia', 'images/gui/l_ciencia.png');
+        this.load.image('l_matematicas', 'images/gui/l_matematicas.png');
+        this.load.image('l_cine', 'images/gui/l_cine.png');
+        this.load.image('l_deportes', 'images/gui/l_deportes.png');
+        this.load.image('l_general', 'images/gui/l_general.png');
+        this.load.image('l_geografia', 'images/gui/l_geografia.png');
+        this.load.image('l_musica', 'images/gui/l_musica.png');
+
+        this.load.atlas("mapache", "images/gui/sprites/mapache_talk.png","images/gui/sprites/mapache_talk.json");
 
 
 
@@ -105,7 +120,9 @@ export class mainScene extends Phaser.Scene{
             // this.scene.start("roulette_scene");
             this.scene.start("waiting_scene");
             //this.scene.start("quiz_scene");
-        });;
+        });
+
+        
 
 
 

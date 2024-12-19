@@ -283,7 +283,7 @@ export class Loading extends Phaser.Scene{
                     callbackScope: this,
                     loop: 10 // Para que se repita indefinidamente
                   });
-            },5000);
+            },1000);
         }else{
             
             Client.socket.emit('selectedChara', this.guildsInfo[this.avaliableMembers[0]['val']]);
@@ -561,7 +561,7 @@ export class Loading extends Phaser.Scene{
                     repeat:1,
                     onComplete: () => {
                         console.log('Elegiste a bulbasur');
-                        forceEndTimer=true;
+                        
                         this.selectAnswer(el,idx,infoQuest);
                     }
                 });
@@ -578,7 +578,7 @@ export class Loading extends Phaser.Scene{
         })
         
         this.loadingScreen('show','',-window.innerHeight/2);
-
+        resultGamer=JSON.parse(resultGamer);//borrar esto en merge
         resultGamer.forEach((el) => {
             if(el.name == this.selectedUser.name){
                 // console.log('tu resultado es: ');
@@ -716,6 +716,7 @@ export class Loading extends Phaser.Scene{
         });
     }
     selectAnswer(option, position,info){
+
         let centerSpecial = 0;
         this.guildsInfo = new Array;
 
