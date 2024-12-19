@@ -145,7 +145,7 @@ io.on('connection',function(socket){
     socket.on('sendResults',function(result){
         console.log(result);
         // io.emit('testTeams',{name:"Team 1",players:users}); // A todos sin importar que! MEGAFONO DORADO
-        socket.broadcast.emit('receiveResults',result); //Todos menos el emisor! MEGAFONO PLATA
+        socket.broadcast.emit('receiveResults',JSON.stringify(result)); //Todos menos el emisor! MEGAFONO PLATA
     });
 
     

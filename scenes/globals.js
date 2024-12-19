@@ -127,6 +127,7 @@
         var teams=[];
         var index_teams=0;
         function generateTeams(){
+
             var equipos=10;
             var team_size=parseInt(users.length/equipos);
             var team=0;

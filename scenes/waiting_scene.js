@@ -22,6 +22,8 @@ export class waiting_scene extends Phaser.Scene{
             var index=0;
             var row=mid_mid_v;
             var scaleHere=.4
+
+            
             for (var i = 0; i < users.length; i++) {
                 var avatar="head_"+randomIntFromInterval(1,36);
                 if (users[i].object) {
@@ -133,3 +135,4 @@ export class waiting_scene extends Phaser.Scene{
 
 
 }
+
