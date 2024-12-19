@@ -1,10 +1,8 @@
-<<<<<<< HEAD
+
 var thisTime=0;
 var globalTimer=0;
 var timerRunning=false;
-=======
 var localVar = [];
->>>>>>> mobileScreen
 export class Loading extends Phaser.Scene{
     constructor () {
         super({ key: 'Loading' });
@@ -578,9 +576,9 @@ export class Loading extends Phaser.Scene{
         this.optionsQuest.forEach((el,idx) => {
             this.optionsQuest[idx].destroy();
         })
-
-        this.loadingScreen('show','',-window.innerHeight/2);
         
+        this.loadingScreen('show','',-window.innerHeight/2);
+
         resultGamer.forEach((el) => {
             if(el.name == this.selectedUser.name){
                 // console.log('tu resultado es: ');
