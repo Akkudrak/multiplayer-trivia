@@ -178,7 +178,6 @@ export class Loading extends Phaser.Scene{
             this.guild = this.add.image(window.innerWidth/2,window.innerHeight/2,'whitelist').setOrigin(0.5,0.5).setScale(1.8);
             this.guild.setAlpha(0);
 
-            this.guild = this.add.image(window.innerWidth/2,window.innerHeight/2,'whitelist').setOrigin(0.5,0.5).setScale(1.8);
             globalTimer=this.add.text(window.innerWidth/2,window.innerHeight, 
             "00:0"+thisTime, { 
                 fontSize: 100,
@@ -567,6 +566,8 @@ export class Loading extends Phaser.Scene{
             this.optionsQuest[idx].destroy();
         })
         localStorage.setItem('avaliableMembers',JSON.stringify(this.avaliableMembers));
+        resultGamer=JSON.parse(resultGamer);
+        console.log(resultGamer);
         resultGamer.forEach((el) => {
             if(el.name == this.selectedUser.name){
                 console.log('tu resultado es: ');

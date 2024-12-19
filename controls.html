@@ -553,7 +553,7 @@
             //ENVIAR PARA PROBAR: Client.socket.emit('testTeams');
 
             console.log('recibiendo datos de resultados');
-            // console.log(data);
+            console.log("datos recibidos",data);
 
 
             // localStorage.setItem('resultGamer',JSON.stringify(data));
@@ -620,7 +620,7 @@
             remmainingTime=remmainingTimeOriginal;
             timerRunning=false;
             forceEndTimer=false;
-            game.scene.scenes[0].selectAnswer(false,0,0)
+            game.scene.scenes[0].selectAnswer("",0,false)
         }else{
             console.log(remmainingTime);
             remmainingTime--;

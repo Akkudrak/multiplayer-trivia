@@ -38,6 +38,8 @@ export class waiting_ready_scene extends Phaser.Scene{
     }
 
     drawParticipants(participants){
+        
+
         console.log(participants);
         var col=mid_h/1.25;
         var row=mid_v/1.3;
@@ -105,3 +107,5 @@ export class waiting_ready_scene extends Phaser.Scene{
         this.scene.start("roulette_scene");
     }
 }
+
+
